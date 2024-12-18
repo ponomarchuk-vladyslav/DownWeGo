@@ -21,7 +21,7 @@ namespace PIIIProject.Views
     {
         const int Columns = 27;
         const int Rows = 16;
-        const int Increment = 1;
+        const int Incrementor = 1;
 
         const int Floor = 0;
         const int Wall = 1;
@@ -35,36 +35,7 @@ namespace PIIIProject.Views
             InitializeComponent();
 
             int[,] map = new int[Columns, Rows];
-            //{
-            //    { },
-            //    { },
-            //    { },
-            //    { },
-            //    { },
-            //    { }, 
-            //    { },
-            //    { }, 
-            //    { },
-            //    { },
-            //    { },
-            //    { },
-            //    { },
-            //    { }, 
-            //    { },
-            //    { },
-            //    { },
-            //    { },
-            //    { },
-            //    { },
-            //    { },
-            //    { },
-            //    { },
-            //    { },
-            //    { },
-            //    { },
-            //    { },
-            //    { }
-            //};
+
 
             Dictionary<int, string> spriteNumbers = new Dictionary<int, string>
             {
@@ -95,6 +66,24 @@ namespace PIIIProject.Views
             }
 
             
+        }
+        private void PrintMapSkeleton(int[,] map)
+        {
+
+            for (int i = 0; i < Rows; i++)
+            {
+                for (int j = 0; j < Columns; j++)
+                {
+                    if (i == 0 || i == Rows - Incrementor || j == 0 || j == Columns - Incrementor)
+                    {
+                        map[i, j] = Wall;
+                    }
+                    else
+                    {
+                        map[i, j] = Floor;
+                    }
+                }
+            }
         }
 
     }
