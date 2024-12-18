@@ -104,5 +104,26 @@ namespace PIIIProject.Views
                 }
             }
         }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            if (e.Key == Key.W)
+            {
+
+            }
+            else if (e.Key == Key.D)
+            {
+
+            }
+            else if(e.Key == Key.S)
+            {
+
+            }
+            else if( e.Key == Key.A)
+            {
+
+            }
+        }
     }
 }
