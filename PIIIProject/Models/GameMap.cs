@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PIIIProject
+namespace PIIIProject.Models
 {
-    class Map
+    public class GameMap
     {
         public enum Direction
         { 
@@ -17,7 +17,7 @@ namespace PIIIProject
             Right
         }
 
-        const char DEFAULT_DISPLAY_CHAR = '.';
+        public const char DEFAULT_DISPLAY_CHAR = '.';
 
         private List<IMapObject>[,] _logicMap;
 
@@ -45,7 +45,7 @@ namespace PIIIProject
             }
         }
 
-        public Map(int height, int width)
+        public GameMap(int height, int width)
         {
             _logicMap = new List<IMapObject>[height, width];
             InitializeAllCells();

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PIIIProject
+namespace PIIIProject.Models
 {
-    internal class Item : IMapObject
+    public class Item : IMapObject
     {
         public const char ITEM_DISPLAY_CHAR = '$';
 

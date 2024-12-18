@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PIIIProject
 {
-    internal interface IMapObject
+    public interface IMapObject
     {
         char GetMapDisplayChar();
     }

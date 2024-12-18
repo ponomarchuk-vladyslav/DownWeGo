@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PIIIProject
+namespace PIIIProject.Models
 {
-    internal class Player : IMapObject, ICollidable
+    public class Player : IMapObject, ICollidable
     {
         public const char PLAYER_DISPLAY_CHAR = '@';
 
         private int CurrentX, CurrentY;
 
-        public Player(Map map, int spawnX, int spawnY)
+        public Player(GameMap map, int spawnX, int spawnY)
         {
             CurrentX = spawnX;
             CurrentY = spawnY;
@@ -23,22 +23,22 @@ namespace PIIIProject
         public char GetMapDisplayChar()
         { return PLAYER_DISPLAY_CHAR; }
 
-        public void MovePlayer(Map.Direction direction, Map map)
+        public void MovePlayer(GameMap.Direction direction, GameMap map)
         {
             int nextX = CurrentX, nextY = CurrentY;
 
             switch (direction)
             {
-                case Map.Direction.Up:
+                case GameMap.Direction.Up:
                     nextY++;
                     break;
-                case Map.Direction.Down:
+                case GameMap.Direction.Down:
                     nextY--;
                     break;
-                case Map.Direction.Left:
+                case GameMap.Direction.Left:
                     nextX--;
                     break;
-                case Map.Direction.Right:
+                case GameMap.Direction.Right:
                     nextX++;
                     break;
                 default:

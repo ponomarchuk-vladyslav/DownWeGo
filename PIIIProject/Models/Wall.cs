@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PIIIProject
+namespace PIIIProject.Models
 {
-    internal class Wall : IMapObject, ICollidable
+    public class Wall : IMapObject, ICollidable
     {
         public const char WALL_DISPLAY_CHAR = '#';
 
