@@ -67,7 +67,7 @@ namespace PIIIProject.Views
 
             
         }
-        private void PrintMapSkeleton(int[,] map)
+        private void MapSkeleton(int[,] map)
         {
 
             for (int i = 0; i < Rows; i++)
