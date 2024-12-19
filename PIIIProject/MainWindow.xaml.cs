@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using PIIIProject.Views;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -25,6 +26,11 @@ namespace PIIIProject
         }
         private void Btn_StartClicked(object sender, RoutedEventArgs e)
         {
+            Game game = new Game();
+
+            game.Show();
+
+            this.Close();
 
         }
 
