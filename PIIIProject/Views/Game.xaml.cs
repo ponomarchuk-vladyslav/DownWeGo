@@ -56,12 +56,15 @@ namespace PIIIProject.Views
                     break;
                 case Key.S:
                     _player.MovePlayer(GameMap.Direction.Down, _map);
+                    UpdateDisplay(_map);
                     break;
                 case Key.D:
                     _player.MovePlayer(GameMap.Direction.Right, _map);
+                    UpdateDisplay(_map);
                     break;
                 case Key.A:
                     _player.MovePlayer(GameMap.Direction.Left, _map);
+                    UpdateDisplay(_map);
                     break;
                 case Key.M:
                     Inventory inv = new Inventory();
@@ -111,7 +114,7 @@ namespace PIIIProject.Views
 
                     //Image img = new Image();
                     //path = MapCharToImage(mapDisplay[i, j]);
-                   //img.Source = new BitmapImage(new Uri(path, UriKind.Relative));
+                    //img.Source = new BitmapImage(new Uri(path, UriKind.Relative));
                     //Map.Children.Add(img);
                     TextBlock txt = new TextBlock();
                     txt.Text = mapDisplay[i, j].ToString();
