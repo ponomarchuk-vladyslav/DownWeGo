@@ -49,22 +49,22 @@ namespace PIIIProject.Views
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-
-            if (e.Key == Key.W)
+            switch (e.Key)
             {
-                _player.MovePlayer(GameMap.Direction.Up, _map);
-            }
-            else if (e.Key == Key.D)
-            {
-                _player.MovePlayer(GameMap.Direction.Right, _map);
-            }
-            else if (e.Key == Key.S)
-            {
-                _player.MovePlayer(GameMap.Direction.Down, _map);
-            }
-            else if (e.Key == Key.A)
-            {
-                _player.MovePlayer(GameMap.Direction.Left, _map);
+                case Key.W:
+                    _player.MovePlayer(GameMap.Direction.Up, _map);
+                    break;
+                case Key.S:
+                    _player.MovePlayer(GameMap.Direction.Down, _map);
+                    break;
+                case Key.D:
+                    _player.MovePlayer(GameMap.Direction.Right, _map);
+                    break;
+                case Key.A:
+                    _player.MovePlayer(GameMap.Direction.Left, _map);
+                    break;
+                default:
+                    break;
             }
 
             UpdateDisplay(_map);
@@ -122,27 +122,6 @@ namespace PIIIProject.Views
 
                     Map.Children.Add(txt);
                 }
-            }
-        }
-
-        private void Window_KeyDown(object sender, KeyEventArgs e)
-        {
-
-            if (e.Key == Key.W)
-            {
-
-            }
-            else if (e.Key == Key.D)
-            {
-
-            }
-            else if(e.Key == Key.S)
-            {
-
-            }
-            else if( e.Key == Key.A)
-            {
-
             }
         }
     }
