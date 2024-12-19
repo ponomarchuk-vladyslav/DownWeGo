@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -109,17 +109,17 @@ namespace PIIIProject.Views
                 for (int j = 0; j < Columns; j++)
                 {
 
-                    Image img = new Image();
-                    path = MapCharToImage(mapDisplay[i, j]);
-                    img.Source = new BitmapImage(new Uri(path, UriKind.Relative));
-                    Map.Children.Add(img);
-                    //TextBlock txt = new TextBlock();
-                    //txt.Text = mapDisplay[i, j].ToString();
-                    //txt.HorizontalAlignment = HorizontalAlignment.Center;
-                    //txt.VerticalAlignment = VerticalAlignment.Center;
-                    //txt.FontSize = 20;
+                    //Image img = new Image();
+                    //path = MapCharToImage(mapDisplay[i, j]);
+                   //img.Source = new BitmapImage(new Uri(path, UriKind.Relative));
+                    //Map.Children.Add(img);
+                    TextBlock txt = new TextBlock();
+                    txt.Text = mapDisplay[i, j].ToString();
+                    txt.HorizontalAlignment = HorizontalAlignment.Center;
+                    txt.VerticalAlignment = VerticalAlignment.Center;
+                    txt.FontSize = 20;
 
-                    //Map.Children.Add(txt);
+                    Map.Children.Add(txt);
                 }
             }
         }
