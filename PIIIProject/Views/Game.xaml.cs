@@ -126,7 +126,9 @@ namespace PIIIProject.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Inve
+            Inventory inventory = new Inventory();
+
+            inventory.Show();
         }
     }
 }
