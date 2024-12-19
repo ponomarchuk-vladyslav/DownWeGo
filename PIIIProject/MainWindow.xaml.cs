@@ -42,6 +42,9 @@ namespace PIIIProject
 
         private void Btn_InfoClicked(object sender, RoutedEventArgs e)
         {
+            Info info = new Info();
+            info.Show();
+            this.Close();
 
         }
     }

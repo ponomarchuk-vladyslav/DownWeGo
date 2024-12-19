@@ -23,5 +23,12 @@ namespace PIIIProject.Views
         {
             InitializeComponent();
         }
+
+        private void BtnMainMenu_Clicked(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
+        }
     }
 }
