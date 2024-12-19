@@ -42,7 +42,7 @@ namespace PIIIProject.Views
                 _map.AddThing(new Wall(), 5, 5 + i);
             }
 
-            _map.AddThing(new Item(), 7, 7);
+            _map.AddThing(new HealthPotion(), 7, 7);
 
             UpdateDisplay(_map);
         }
