@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PIIIProject.Models
 {
-    static class Inventory
+    static class InventoryList
     {
         private static ObservableCollection<Item> _items = new ObservableCollection<Item>();
 

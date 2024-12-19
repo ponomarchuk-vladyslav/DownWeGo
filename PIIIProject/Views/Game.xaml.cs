@@ -56,15 +56,12 @@ namespace PIIIProject.Views
                     break;
                 case Key.S:
                     _player.MovePlayer(GameMap.Direction.Down, _map);
-                    UpdateDisplay(_map);
                     break;
                 case Key.D:
                     _player.MovePlayer(GameMap.Direction.Right, _map);
-                    UpdateDisplay(_map);
                     break;
                 case Key.A:
                     _player.MovePlayer(GameMap.Direction.Left, _map);
-                    UpdateDisplay(_map);
                     break;
                 case Key.M:
                     Inventory inv = new Inventory();
@@ -125,6 +122,11 @@ namespace PIIIProject.Views
                     Map.Children.Add(txt);
                 }
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Inve
         }
     }
 }

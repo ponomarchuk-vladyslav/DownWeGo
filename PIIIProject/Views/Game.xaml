@@ -16,8 +16,8 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="1" Grid.Column="0" Margin="25"/>
-        <Button Grid.Row="1" Grid.Column="1" Margin="25"/>
+        <Button Grid.Row="1" Grid.Column="0" Margin="25" Content="Save" FontSize="50"/>
+        <Button Grid.Row="1" Grid.Column="1" Margin="25" Content="Inventory" FontSize="50" Click="Button_Click"/>
 
         <Grid Grid.Row="0" Grid.ColumnSpan="2">
             <UniformGrid x:Name="Map" Rows="16" Columns="27" Background="HotPink"/>
