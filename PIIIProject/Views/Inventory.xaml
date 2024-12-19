@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PIIIProject.Views"
         mc:Ignorable="d"
-        Title="Inventory" Height="450" Width="800">
+        Title="Inventory" Height="450" Width="800" Background="Black">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="75"/>
@@ -22,25 +22,28 @@
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Text="Inventory" Grid.Row="0" FontSize="50" FontWeight="Bold" HorizontalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3"/>
-        <ListBox Grid.Row="1" Grid.Column="0" Grid.RowSpan="7" Margin="15">
+        <TextBlock Text="Inventory" Grid.Row="0" FontSize="50" FontWeight="Bold" HorizontalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Foreground="White"/>
+        <ListBox Grid.Row="1" Grid.Column="0" Grid.RowSpan="7" Margin="15" Background="DarkSlateGray" MouseDoubleClick="LbItems_MouseDoubleClick">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Name:" FontWeight="Bold" Foreground="White"/>
+                        <Label Content="{Binding}" Foreground="Gold"/>
+                    </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <ListBox Grid.Row="1" Grid.Column="1" Grid.RowSpan="5" Margin="15" Grid.ColumnSpan="2">
+        <ListBox Grid.Row="1" Grid.Column="1" Grid.RowSpan="5" Margin="15" Grid.ColumnSpan="2" Background="DarkSlateGray">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-
+                    
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <Button Grid.Column="1" Margin="5, 20, 5, 20" Grid.Row="6" x:Name="Back" Content="Leave" FontSize="25" FontWeight="Bold" Grid.RowSpan="2" Click="BtnBack_Clicked"/>
 
-        <Button Grid.Column="1" Margin="5" Grid.Row="6"></Button>
-        <Button Grid.Column="2" Margin="5" Grid.Row="6"></Button>
+        <Button Grid.Column="2" Margin="5, 20, 5, 20" Grid.Row="6" Content="Execute" FontSize="25" FontWeight="Bold" Grid.RowSpan="2" Click="BtnExecute_Clicked"/>
 
 
     </Grid>

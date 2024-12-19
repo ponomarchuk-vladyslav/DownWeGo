@@ -23,5 +23,23 @@ namespace PIIIProject.Views
         {
             InitializeComponent();
         }
+
+        private void BtnExecute_Clicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnBack_Clicked(object sender, RoutedEventArgs e)
+        {
+            
+
+            this.Close();
+
+        }
+
+        private void LbItems_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }
