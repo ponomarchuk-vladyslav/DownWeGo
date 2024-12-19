@@ -44,11 +44,17 @@ namespace PIIIProject.Models
                 default:
                     break;
             }
+
+            if (nextY < 0 || nextY >= map.LogicMap.GetLength(0) || nextX < 0 || nextX >= map.LogicMap.GetLength(1))
+                return;
+
             // Temp, to replace with a method
             if (map.LogicMap[nextY, nextX].OfType<ICollidable>().Any())
                 return;
 
             map.MoveThing(this, CurrentX, CurrentY, direction);
+            CurrentX = nextX;
+            CurrentY = nextY;
         }
     }
 }

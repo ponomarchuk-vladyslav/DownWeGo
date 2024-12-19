@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using PIIIProject.Models;
 
+using System.IO;
+
 namespace PIIIProject.Views
 {
     /// <summary>
@@ -23,41 +26,48 @@ namespace PIIIProject.Views
         const int Columns = 27;
         const int Rows = 16;
 
-        const int Floor = 0;
-        const int Wall = 1;
-        const int Player = 2;
-        const int Item = 3;
-        const int Enemy = 4;
-        const int Boss = 5;
-        const int Escape = 6;
+        private GameMap _map;
+        private Player _player;
+
         public Game()
         {
             InitializeComponent();
 
-            GameMap map = new GameMap(Rows, Columns);
+            _map = new GameMap(Rows, Columns);
 
-            //Dictionary<int, string> spriteNumbers = new Dictionary<int, string>
-            //{
-            //    {Floor, "/Sprites/Floor.png"},
-            //    {Wall, "/Sprites/wall.png"},
-            //    {Player, "/Sprites/knight.jpg"},
-            //    {Item, "/Sprites/Chest.png"},
-            //    {Enemy, "/Sprites/skeleton.png"},
-            //    {Boss, "/Sprites/Boss.png"},
-            //    {Escape, "/Sprites/Escape.png"}
-
-            //};
-
-            Player player = new Player(map, 0, 0);
+            _player = new Player(_map, 0, 7);
 
             for (int i = 0; i < 5; i++)
             {
-                map.AddThing(new Wall(), 5, 5 + i);
+                _map.AddThing(new Wall(), 5, 5 + i);
             }
 
-            map.AddThing(new Item(), 7, 7);
+            _map.AddThing(new Item(), 7, 7);
 
-            UpdateDisplay(map);
+            UpdateDisplay(_map);
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            if (e.Key == Key.W)
+            {
+                _player.MovePlayer(GameMap.Direction.Up, _map);
+            }
+            else if (e.Key == Key.D)
+            {
+                _player.MovePlayer(GameMap.Direction.Right, _map);
+            }
+            else if (e.Key == Key.S)
+            {
+                _player.MovePlayer(GameMap.Direction.Down, _map);
+            }
+            else if (e.Key == Key.A)
+            {
+                _player.MovePlayer(GameMap.Direction.Left, _map);
+            }
+
+            UpdateDisplay(_map);
         }
 
         public string MapCharToImage(char c)
@@ -67,16 +77,16 @@ namespace PIIIProject.Views
             switch (c)
             {
                 case Models.Item.ITEM_DISPLAY_CHAR:
-                    img = "/Sprites/Chest.png";
+                    img = "./Sprites/Chest.png";
                     break;
                 case Models.Player.PLAYER_DISPLAY_CHAR:
-                    img = "/Sprites/knight.jpg";
+                    img = "./Sprites/knight.jpg";
                     break;
                 case Models.Wall.WALL_DISPLAY_CHAR:
-                    img = "/Sprites/wall.png";
+                    img = "./Sprites/wall.png";
                     break;
                 default:
-                    img = "/Sprites/Floor.png";
+                    img = "./Sprites/Floor.png";
                     break;
             }
 
@@ -88,19 +98,29 @@ namespace PIIIProject.Views
             char[,] mapDisplay = map.DisplayMap;
             string path;
 
+            Map.Children.Clear();
+
             for (int i = 0; i < Rows; i++)
             {
                 for (int j = 0; j < Columns; j++)
                 {
-                    path = MapCharToImage(mapDisplay[i, j]);
+                    //path = MapCharToImage(mapDisplay[i, j]);
+                    //path = "../Sprites/wall.png";
 
-                    Image image = new Image
-                    {
-                        Source = new BitmapImage(new Uri(path, UriKind.Relative)), //Allows relative paths
-                        Stretch = Stretch.Fill //Fills the whole space
-                    };
+                    //BitmapImage img = new BitmapImage();
+                    //img.UriSource = new Uri(path, UriKind.Relative);
 
-                    Map.Children.Add(image);
+                    //Image image = new Image()
+                    //{
+                    //    Source = img,
+                    //    Stretch = Stretch.Fill
+                    //};
+
+                    TextBlock txt = new TextBlock();
+                    txt.Text = mapDisplay[i, j].ToString();
+                    txt.FontSize = 20;
+
+                    Map.Children.Add(txt);
                 }
             }
         }

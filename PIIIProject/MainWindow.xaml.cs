@@ -19,6 +19,9 @@ namespace PIIIProject
         public MainWindow()
         {
             InitializeComponent();
+
+            Views.Game test = new Views.Game();
+            test.Show();
         }
     }
 }

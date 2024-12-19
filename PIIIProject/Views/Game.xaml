@@ -5,10 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PIIIProject.Views"
         mc:Ignorable="d"
-        Title="Game" Height="900" Width="1600">
-    <ScrollViewer>
-        <UniformGrid x:Name="Map" Rows="16" Columns="27"/>
-
-
-    </ScrollViewer>
+        Title="Game" Height="900" Width="1600" KeyDown="Window_KeyDown">
+    <Grid>
+        <UniformGrid x:Name="Map" Rows="16" Columns="27" Background="HotPink"/>
+    </Grid>
 </Window>

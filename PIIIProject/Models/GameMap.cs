@@ -64,6 +64,9 @@ namespace PIIIProject.Models
 
         public void AddThing(IMapObject thing, int thingX, int thingY)
         {
+            if (thingY < 0 || thingY >= LogicMap.GetLength(0) || thingX < 0 || thingX >= LogicMap.GetLength(1))
+                return;
+
             if (thing is null)
                 throw new Exception("Thing can't be null.");
             _logicMap[thingY, thingX].Add(thing);
@@ -71,6 +74,9 @@ namespace PIIIProject.Models
 
         public void RemoveThing(IMapObject thing, int thingX, int thingY)
         {
+            if (thingY < 0 || thingY >= LogicMap.GetLength(0) || thingX < 0 || thingX >= LogicMap.GetLength(1))
+                return;
+
             if (!_logicMap[thingY, thingX].Contains(thing))
                 throw new Exception("There's no such thing there.");
             _logicMap[thingY, thingX].Remove(thing);
@@ -78,6 +84,9 @@ namespace PIIIProject.Models
 
         public void MoveThing(IMapObject thing, int thingX, int thingY, Direction direction)
         {
+            if (thingY < 0 || thingY >= LogicMap.GetLength(0) || thingX < 0 || thingX >= LogicMap.GetLength(1))
+                return;
+                
             if (!_logicMap[thingY, thingX].Contains(thing))
                 throw new Exception("The thing you want to move is not there.");
 
