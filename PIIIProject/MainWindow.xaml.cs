@@ -21,9 +21,6 @@ namespace PIIIProject
         public MainWindow()
         {
             InitializeComponent();
-
-            Views.Game test = new Views.Game();
-            test.Show();
         }
         private void Btn_StartClicked(object sender, RoutedEventArgs e)
         {

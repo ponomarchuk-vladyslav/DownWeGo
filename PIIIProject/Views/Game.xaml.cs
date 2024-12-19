@@ -118,6 +118,8 @@ namespace PIIIProject.Views
 
                     TextBlock txt = new TextBlock();
                     txt.Text = mapDisplay[i, j].ToString();
+                    txt.HorizontalAlignment = HorizontalAlignment.Center;
+                    txt.VerticalAlignment = VerticalAlignment.Center;
                     txt.FontSize = 20;
 
                     Map.Children.Add(txt);
