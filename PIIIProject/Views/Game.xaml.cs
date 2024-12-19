@@ -63,6 +63,10 @@ namespace PIIIProject.Views
                 case Key.A:
                     _player.MovePlayer(GameMap.Direction.Left, _map);
                     break;
+                case Key.M:
+                    Inventory inv = new Inventory();
+                    inv.Show();
+                    break;
                 default:
                     break;
             }
