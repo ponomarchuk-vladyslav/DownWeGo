@@ -1,4 +1,5 @@
-﻿using PIIIProject.Views;
+﻿using Microsoft.Win32;
+using PIIIProject.Views;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -36,6 +37,9 @@ namespace PIIIProject
 
         private void Btn_LoadClicked(object sender, RoutedEventArgs e)
         {
+            
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            
 
         }
 
