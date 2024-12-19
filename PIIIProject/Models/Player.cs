@@ -9,13 +9,28 @@ namespace PIIIProject.Models
     public class Player : IMapObject, ICollidable
     {
         public const char PLAYER_DISPLAY_CHAR = '@';
+        private const int STARTING_HEALTH = 25;
 
-        private int CurrentX, CurrentY;
+        private int _currentX, _currentY;
+        private int _health;
+
+        public int Health
+        {
+            get { return _health; }
+            set
+            {
+                if (value < 0)
+                    throw new Exception("Health can't be negative. Can't be more dead than dead...");
+
+                _health = value;
+            }
+        }
 
         public Player(GameMap map, int spawnX, int spawnY)
         {
-            CurrentX = spawnX;
-            CurrentY = spawnY;
+            _currentX = spawnX;
+            _currentY = spawnY;
+            _health = STARTING_HEALTH;
 
             map.AddThing(this, spawnX, spawnY);
         } 
@@ -25,7 +40,7 @@ namespace PIIIProject.Models
 
         public void MovePlayer(GameMap.Direction direction, GameMap map)
         {
-            int nextX = CurrentX, nextY = CurrentY;
+            int nextX = _currentX, nextY = _currentY;
 
             switch (direction)
             {
@@ -52,9 +67,9 @@ namespace PIIIProject.Models
             if (map.LogicMap[nextY, nextX].OfType<ICollidable>().Any())
                 return;
 
-            map.MoveThing(this, CurrentX, CurrentY, direction);
-            CurrentX = nextX;
-            CurrentY = nextY;
+            map.MoveThing(this, _currentX, _currentY, direction);
+            _currentX = nextX;
+            _currentY = nextY;
         }
     }
 }

@@ -42,7 +42,7 @@ namespace PIIIProject.Views
                 _map.AddThing(new Wall(), 5, 5 + i);
             }
 
-            _map.AddThing(new Item(), 7, 7);
+            _map.AddThing(new HealthPotion(), 7, 7);
 
             UpdateDisplay(_map);
         }
@@ -62,6 +62,10 @@ namespace PIIIProject.Views
                     break;
                 case Key.A:
                     _player.MovePlayer(GameMap.Direction.Left, _map);
+                    break;
+                case Key.M:
+                    Inventory inv = new Inventory();
+                    inv.Show();
                     break;
                 default:
                     break;
@@ -118,6 +122,8 @@ namespace PIIIProject.Views
 
                     TextBlock txt = new TextBlock();
                     txt.Text = mapDisplay[i, j].ToString();
+                    txt.HorizontalAlignment = HorizontalAlignment.Center;
+                    txt.VerticalAlignment = VerticalAlignment.Center;
                     txt.FontSize = 20;
 
                     Map.Children.Add(txt);

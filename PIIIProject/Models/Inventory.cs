@@ -23,10 +23,10 @@ namespace PIIIProject.Models
             return _items;
         }
         public static ObservableCollection<Item> GetCollection()
-        {
+    {
             return _items;
         }
 
-        
+
     }
 }
