@@ -44,6 +44,8 @@
         <Button Grid.Row="3" Grid.Column="1" Style="{StaticResource StyleCombatButton}" Content="Block"/>
         <Button Grid.Row="3" Grid.Column="2" Style="{StaticResource StyleCombatButton}" Content="Inventory"/>
         <Button Grid.Row="3" Grid.Column="3" Style="{StaticResource StyleCombatButton}" Content="Run Away"/>
-
+        <Border BorderBrush="DarkOrange" BorderThickness="5" Margin="15" Grid.RowSpan="3">
+            <TextBlock Background="Black" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Text="Stats" Foreground="DarkOrange" FontWeight="Bold" FontSize="25" HorizontalAlignment="Center"/>
+        </Border>
     </Grid>
 </Window>
