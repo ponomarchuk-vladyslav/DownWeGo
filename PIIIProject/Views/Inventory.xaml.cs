@@ -33,7 +33,7 @@ namespace PIIIProject.Views
             if (_player.Inventory.Count > 0)
                 ToggleTxtb_NoItemsVisibility();
             
-            PlayerStats.Text = _player.AllPlayerStats;
+            PlayerStats.Text = _player.AllStats;
         }
 
         private void Item_Selected(object sender, RoutedEventArgs e)
@@ -51,7 +51,7 @@ namespace PIIIProject.Views
                 tempItem.Use(_player);
                 _player.Inventory.Remove(tempItem);
                 ItemDescription.Text = "";
-                PlayerStats.Text = _player.AllPlayerStats;
+                PlayerStats.Text = _player.AllStats;
                 if (_player.Inventory.Count == 0)
                     ToggleTxtb_NoItemsVisibility();
             }
