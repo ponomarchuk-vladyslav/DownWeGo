@@ -30,7 +30,10 @@ namespace PIIIProject.Views
             InitializeComponent();
             _player = player;
             AllItems.ItemsSource = _player.Inventory;
-            PlayerStats.Text = _player.AllStats;
+            if (_player.Inventory.Count > 0)
+                ToggleTxtb_NoItemsVisibility();
+            
+            PlayerStats.Text = _player.AllPlayerStats;
         }
 
         private void Item_Selected(object sender, RoutedEventArgs e)
@@ -48,13 +51,25 @@ namespace PIIIProject.Views
                 tempItem.Use(_player);
                 _player.Inventory.Remove(tempItem);
                 ItemDescription.Text = "";
-                PlayerStats.Text = _player.AllStats;
+                PlayerStats.Text = _player.AllPlayerStats;
+                if (_player.Inventory.Count == 0)
+                    ToggleTxtb_NoItemsVisibility();
             }
         }
 
         private void BtnBack_Clicked(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+        private void ToggleTxtb_NoItemsVisibility()
+        {
+            if (Txtb_NoItems.Visibility == Visibility.Visible)
+                Txtb_NoItems.Visibility = Visibility.Hidden;
+            else if (Txtb_NoItems.Visibility == Visibility.Hidden) //Also could try making it if(Visibility != Visibility.Visible)
+                Txtb_NoItems.Visibility = Visibility.Visible;
+            
+
+            
         }
     }
 }

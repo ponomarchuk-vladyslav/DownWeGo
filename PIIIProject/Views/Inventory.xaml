@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PIIIProject.Views"
         mc:Ignorable="d"
-        Title="Inventory" Height="450" Width="800" Background="Black">
+        Title="Inventory" Height="475" Width="825" Background="Black">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="75"/>
@@ -24,7 +24,7 @@
             <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
         <TextBlock Text="Inventory" Grid.Row="0" FontSize="50" FontWeight="Bold" HorizontalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Foreground="White"/>
-        <ListBox x:Name="AllItems" Grid.Row="1" Grid.Column="0" Grid.RowSpan="8" Margin="15" Background="DarkSlateGray" SelectionMode="Single" SelectionChanged="Item_Selected">
+        <ListBox x:Name="AllItems" Grid.Row="1" Grid.Column="0" Grid.RowSpan="8" Margin="20, 15, 20, 40" Background="DarkSlateGray" SelectionMode="Single" SelectionChanged="Item_Selected">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -33,16 +33,16 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-
+        <TextBlock x:Name="Txtb_NoItems" Text="No items yet, keep playing!" FontSize="20" Foreground="White" Grid.Row="2" Grid.RowSpan="2"  Margin="25" Visibility="Visible"/>
         <TextBox x:Name="PlayerStats" Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="2" Margin="15" Background="DarkSlateGray" Foreground="White">
         </TextBox>
 
         <TextBox x:Name="ItemDescription" Grid.Row="4" Grid.Column="1" Grid.RowSpan="3" Margin="15" Grid.ColumnSpan="2" Background="DarkSlateGray" Foreground="Gold">
         
         </TextBox>
-        <Button Grid.Column="1" Margin="5, 20, 5, 20" Grid.Row="7" x:Name="Back" Content="Leave" FontSize="25" FontWeight="Bold" Grid.RowSpan="2" Click="BtnBack_Clicked"/>
+        <Button Grid.Column="1" Margin="15, 10, 15, 40" Grid.Row="7" x:Name="Back" Content="Back To Game" FontSize="25" FontWeight="Bold" Grid.RowSpan="2" Click="BtnBack_Clicked"/>
 
-        <Button Grid.Column="2" Margin="5, 20, 5, 20" Grid.Row="7" Content="Use" FontSize="25" FontWeight="Bold" Grid.RowSpan="2" Click="BtnUse_Clicked"/>
+        <Button Grid.Column="2" Margin="15, 10, 15, 40" Grid.Row="7" Content="Use" FontSize="25" FontWeight="Bold" Grid.RowSpan="2" Click="BtnUse_Clicked"/>
 
 
     </Grid>
