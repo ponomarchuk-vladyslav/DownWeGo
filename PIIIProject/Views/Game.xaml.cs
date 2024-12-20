@@ -49,7 +49,7 @@ namespace PIIIProject.Views
 
             _map.AddThing(new Enemy(3), 10, 10);
 
-            UpdateDisplay(_map);
+            UpdateDisplay(_map, _player);
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -72,7 +72,7 @@ namespace PIIIProject.Views
                     break;
             }
 
-            UpdateDisplay(_map);
+            UpdateDisplay(_map, _player);
         }
 
         public string MapCharToImage(char c)
@@ -94,34 +94,45 @@ namespace PIIIProject.Views
                     img = "./Sprites/skeleton.png";
                     break;
                 default:
-                    img = "./Sprites/Floor.png";
+                    img = "./Sprites/wall.png";
                     break;
             }
 
             return img;
         }
 
-        public void UpdateDisplay(GameMap map)
+        public void UpdateDisplay(GameMap map, Player player)
         {
+            int heightDifference = player.CurrentY - (Rows / 2);
+            int widthDifference = (Columns / 2) - player.CurrentX;
             char[,] mapDisplay = map.DisplayMap;
             string path;
 
             Map.Children.Clear();
 
-            for (int i = 0; i < Rows; i++)
+            for (int row = 0; row < Rows; row++)
             {
-                for (int j = 0; j < Columns; j++)
+                for (int column = 0; column < Columns; column++)
                 {
+                    TextBlock txt = new TextBlock()
+                    {
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Center,
+                        FontSize = 20
+                    };
+
+                    if (row < heightDifference || column < widthDifference || row - heightDifference >= mapDisplay.GetLength(0) || column - widthDifference >= mapDisplay.GetLength(1))
+                    {
+                        txt.Text = "";
+                    }
+                    else
+                    {
+                        txt.Text = mapDisplay[row - heightDifference, column - widthDifference].ToString();
+                    }
                     //Image img = new Image();
                     //path = MapCharToImage(mapDisplay[i, j]);
                     //img.Source = new BitmapImage(new Uri(path, UriKind.Relative));
                     //Map.Children.Add(img);
-                    TextBlock txt = new TextBlock();
-                    txt.Text = mapDisplay[i, j].ToString();
-                    txt.HorizontalAlignment = HorizontalAlignment.Center;
-                    txt.VerticalAlignment = VerticalAlignment.Center;
-                    txt.FontSize = 20;
-
                     Map.Children.Add(txt);
                 }
             }

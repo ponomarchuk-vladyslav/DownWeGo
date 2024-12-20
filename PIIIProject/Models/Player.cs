@@ -26,6 +26,14 @@ namespace PIIIProject.Models
                 _inventory = value;
             }
         }
+        public int CurrentX
+        {
+            get { return _currentX; }
+        }
+        public int CurrentY
+        {
+            get { return _currentY; }
+        }
 
         public Player(GameMap map, int spawnX, int spawnY) : base(PLAYER_DEFAULT_NAME, STARTING_HEALTH, STARTING_STRENGTH, STARTING_DEFENSE)
         {
