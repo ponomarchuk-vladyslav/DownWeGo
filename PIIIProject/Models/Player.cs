@@ -7,26 +7,14 @@ using System.Collections.ObjectModel;
 
 namespace PIIIProject.Models
 {
-    public class Player : IMapObject, ICollidable
+    public class Player : Creature, IMapObject, ICollidable
     {
+        public const string PLAYER_DEFAULT_NAME = "Player";
         public const char PLAYER_DISPLAY_CHAR = '@';
-        private const int STARTING_HEALTH = 25;
+        private const int STARTING_HEALTH = 25, STARTING_STRENGTH = 1, STARTING_DEFENSE = 1;
 
         private int _currentX, _currentY;
-        private int _health;
         private ObservableCollection<Item> _inventory;
-
-        public int Health
-        {
-            get { return _health; }
-            set
-            {
-                if (value < 0)
-                    throw new Exception("Health can't be negative. Can't be more dead than dead...");
-
-                _health = value;
-            }
-        }
 
         public ObservableCollection<Item> Inventory
         {
@@ -39,27 +27,19 @@ namespace PIIIProject.Models
             }
         }
 
-        public string AllPlayerStats
-        {
-            get 
-            {
-                return $"Player stats:\n" +
-                    $"Health: {Health}";
-            }
-        }
-
-        public Player(GameMap map, int spawnX, int spawnY)
+        public Player(GameMap map, int spawnX, int spawnY) : base(PLAYER_DEFAULT_NAME, STARTING_HEALTH, STARTING_STRENGTH, STARTING_DEFENSE)
         {
             _currentX = spawnX;
             _currentY = spawnY;
-            _health = STARTING_HEALTH;
             _inventory = new ObservableCollection<Item>();
 
             map.AddThing(this, spawnX, spawnY);
         } 
 
         public char GetMapDisplayChar()
-        { return PLAYER_DISPLAY_CHAR; }
+        { 
+            return PLAYER_DISPLAY_CHAR; 
+        }
 
         public void MovePlayer(GameMap.Direction direction, GameMap map)
         {

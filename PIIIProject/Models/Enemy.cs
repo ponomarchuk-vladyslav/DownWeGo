@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PIIIProject.Models
+{
+    class Enemy : Creature, IMapObject, ICollidable
+    {
+        public const string ENEMY_DEFAULT_NAME = "Skeleton";
+        public const char ENEMY_DISPLAY_CHAR = 'X';
+        public const int START_HEALTH = 10, START_STRENGTH = 2, START_DEFENSE = 1;
+        public char GetMapDisplayChar()
+        { 
+            return ENEMY_DISPLAY_CHAR;  
+        }
+
+        public Enemy(int level, string name = ENEMY_DEFAULT_NAME) : base(name, level * START_HEALTH, level * START_STRENGTH, level * START_DEFENSE)
+        {
+
+        }
+    }
+}

@@ -43,6 +43,11 @@ namespace PIIIProject.Views
             }
 
             _map.AddThing(new HealthPotion(), 7, 7);
+            _map.AddThing(new HealthPotion(), 7, 7);
+            _map.AddThing(new HealthPotion(), 3, 2);
+            _map.AddThing(new HealthPotion(), 15, 5);
+
+            _map.AddThing(new Enemy(3), 10, 10);
 
             UpdateDisplay(_map);
         }
@@ -76,14 +81,17 @@ namespace PIIIProject.Views
 
             switch (c)
             {
-                case Models.Item.ITEM_DISPLAY_CHAR:
+                case Item.ITEM_DISPLAY_CHAR:
                     img = "./Sprites/Chest.png";
                     break;
-                case Models.Player.PLAYER_DISPLAY_CHAR:
+                case Player.PLAYER_DISPLAY_CHAR:
                     img = "./Sprites/knight.jpg";
                     break;
-                case Models.Wall.WALL_DISPLAY_CHAR:
+                case Wall.WALL_DISPLAY_CHAR:
                     img = "./Sprites/wall.png";
+                    break;
+                case Enemy.ENEMY_DISPLAY_CHAR:
+                    img = "./Sprites/skeleton.png";
                     break;
                 default:
                     img = "./Sprites/Floor.png";

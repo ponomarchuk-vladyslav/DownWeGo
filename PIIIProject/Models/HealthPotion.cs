@@ -23,7 +23,7 @@ namespace PIIIProject.Models
 
         public override void Use(Player player)
         {
-            player.Health += HEALTH_RESTORED;
+            player.Heal(HEALTH_RESTORED);
         }
     }
 }

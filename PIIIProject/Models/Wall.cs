@@ -16,6 +16,8 @@ namespace PIIIProject.Models
         }
 
         public char GetMapDisplayChar()
-        { return WALL_DISPLAY_CHAR; }
+        { 
+            return WALL_DISPLAY_CHAR; 
+        }
     }
 }
