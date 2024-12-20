@@ -23,28 +23,36 @@ namespace PIIIProject.Views
     /// </summary>
     public partial class Inventory : Window
     {
+        private Player _player;
 
-        public Inventory()
+        public Inventory(Player player)
         {
             InitializeComponent();
+            _player = player;
+            AllItems.ItemsSource = _player.Inventory;
         }
 
-        private void BtnExecute_Clicked(object sender, RoutedEventArgs e)
+        private void Item_Selected(object sender, RoutedEventArgs e)
         {
+            Item tempItem = AllItems.SelectedItem as Item;
+            if (tempItem is not null)
+                ItemDescription.Text = tempItem.Description;
+        }
 
+        private void BtnUse_Clicked(object sender, RoutedEventArgs e)
+        {
+            Item tempItem = AllItems.SelectedItem as Item;
+            if (tempItem is not null)
+            {
+                tempItem.Use(_player);
+                _player.Inventory.Remove(tempItem);
+                ItemDescription.Text = "";
+            }
         }
 
         private void BtnBack_Clicked(object sender, RoutedEventArgs e)
         {
-            
-
             this.Close();
-
-        }
-
-        private void LbItems_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-
         }
     }
 }

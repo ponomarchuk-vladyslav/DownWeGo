@@ -11,6 +11,11 @@ namespace PIIIProject.Models
         private const int HEALTH_RESTORED = 5;
         private const string DISPLAY_NAME = "Health Potion", DESCRIPTION = $"A health potion that restores 5 health.";
 
+        public override string Name
+        { get { return DISPLAY_NAME; } }
+        public override string Description
+        { get { return DESCRIPTION; } }
+
         public HealthPotion() : base()
         {
 

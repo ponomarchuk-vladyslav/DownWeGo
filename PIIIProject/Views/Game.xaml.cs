@@ -63,10 +63,6 @@ namespace PIIIProject.Views
                 case Key.A:
                     _player.MovePlayer(GameMap.Direction.Left, _map);
                     break;
-                case Key.M:
-                    Inventory inv = new Inventory();
-                    inv.Show();
-                    break;
                 default:
                     break;
             }
@@ -108,7 +104,6 @@ namespace PIIIProject.Views
             {
                 for (int j = 0; j < Columns; j++)
                 {
-
                     //Image img = new Image();
                     //path = MapCharToImage(mapDisplay[i, j]);
                     //img.Source = new BitmapImage(new Uri(path, UriKind.Relative));
@@ -126,7 +121,7 @@ namespace PIIIProject.Views
 
         private void BtnInventory_Click(object sender, RoutedEventArgs e)
         {
-            Inventory inventory = new Inventory();
+            Inventory inventory = new Inventory(_player);
 
             inventory.Show();
         }

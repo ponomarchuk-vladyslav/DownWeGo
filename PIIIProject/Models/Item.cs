@@ -15,6 +15,9 @@ namespace PIIIProject.Models
             
         }
 
+        public abstract string Name { get; }
+        public abstract string Description { get; }
+
         public abstract void Use(Player player);
         
         public char GetMapDisplayChar()

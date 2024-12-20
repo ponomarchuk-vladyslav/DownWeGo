@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace PIIIProject.Models
 {
@@ -13,7 +14,7 @@ namespace PIIIProject.Models
 
         private int _currentX, _currentY;
         private int _health;
-        private List<Item> _inventory;
+        private ObservableCollection<Item> _inventory;
 
         public int Health
         {
@@ -27,7 +28,7 @@ namespace PIIIProject.Models
             }
         }
 
-        public List<Item> Inventory
+        public ObservableCollection<Item> Inventory
         {
             get { return _inventory; }
             set
@@ -43,7 +44,7 @@ namespace PIIIProject.Models
             _currentX = spawnX;
             _currentY = spawnY;
             _health = STARTING_HEALTH;
-            _inventory = new List<Item>();
+            _inventory = new ObservableCollection<Item>();
 
             map.AddThing(this, spawnX, spawnY);
         } 
