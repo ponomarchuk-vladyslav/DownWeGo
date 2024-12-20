@@ -47,5 +47,8 @@
         <Border BorderBrush="DarkOrange" BorderThickness="5" Margin="15" Grid.RowSpan="3">
             <TextBlock Background="Black" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Text="Stats" Foreground="DarkOrange" FontWeight="Bold" FontSize="25" HorizontalAlignment="Center"/>
         </Border>
+        <Border Grid.Column="1" Grid.ColumnSpan="2" Margin="15" BorderThickness="5" BorderBrush="DarkOrange">
+            <TextBlock Text="Enemy" Foreground="DarkOrange" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="35" FontWeight="Bold"/>
+        </Border>
     </Grid>
 </Window>
