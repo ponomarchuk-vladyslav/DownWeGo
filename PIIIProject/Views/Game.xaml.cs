@@ -124,7 +124,7 @@ namespace PIIIProject.Views
             }
         }
 
-        private void BtnInventory_Clicked(object sender, RoutedEventArgs e)
+        private void BtnInventory_Click(object sender, RoutedEventArgs e)
         {
             Inventory inventory = new Inventory();
 

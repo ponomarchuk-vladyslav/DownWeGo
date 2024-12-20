@@ -63,9 +63,9 @@ namespace PIIIProject.Models
             if (nextY < 0 || nextY >= map.LogicMap.GetLength(0) || nextX < 0 || nextX >= map.LogicMap.GetLength(1))
                 return;
 
-            // Temp, to replace with a method
-            if (map.LogicMap[nextY, nextX].OfType<ICollidable>().Any())
-                return;
+            foreach (object thing in map.LogicMap[nextY, nextX])
+                if (thing is ICollidable)
+                    return;
 
             map.MoveThing(this, _currentX, _currentY, direction);
             _currentX = nextX;
