@@ -84,13 +84,12 @@ namespace PIIIProject.Models
             _currentX = nextX;
             _currentY = nextY;
 
-            // Can't remove stuff while iterating through it
-            foreach (IMapObject thing in map.LogicMap[_currentY, _currentX])
+            for (int i = map.LogicMap[_currentY, _currentX].Count - 1; i >= 0; i--)
             {
-                if (thing is Item)
+                if (map.LogicMap[_currentY, _currentX][i] is Item)
                 {
-                    Inventory.Add(thing as Item);
-                    map.RemoveThing(thing, _currentX, _currentY);
+                    Inventory.Add(map.LogicMap[_currentY, _currentX][i] as Item);
+                    map.RemoveThing(map.LogicMap[_currentY, _currentX][i], _currentX, _currentY);
                 }
             }
         }
