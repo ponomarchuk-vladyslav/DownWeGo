@@ -39,6 +39,15 @@ namespace PIIIProject.Models
             }
         }
 
+        public string AllPlayerStats
+        {
+            get 
+            {
+                return $"Player stats:\n" +
+                    $"Health: {Health}";
+            }
+        }
+
         public Player(GameMap map, int spawnX, int spawnY)
         {
             _currentX = spawnX;

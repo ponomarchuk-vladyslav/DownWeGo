@@ -30,6 +30,7 @@ namespace PIIIProject.Views
             InitializeComponent();
             _player = player;
             AllItems.ItemsSource = _player.Inventory;
+            PlayerStats.Text = _player.AllPlayerStats;
         }
 
         private void Item_Selected(object sender, RoutedEventArgs e)
@@ -47,6 +48,7 @@ namespace PIIIProject.Views
                 tempItem.Use(_player);
                 _player.Inventory.Remove(tempItem);
                 ItemDescription.Text = "";
+                PlayerStats.Text = _player.AllPlayerStats;
             }
         }
 
