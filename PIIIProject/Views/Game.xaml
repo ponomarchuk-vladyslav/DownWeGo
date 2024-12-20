@@ -5,7 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PIIIProject.Views"
         mc:Ignorable="d"
-        Title="Game" Height="900" Width="1600" KeyDown="Window_KeyDown">
+        Title="Game" Height="900" Width="1600" KeyDown="Window_KeyDown" Background="Black">
+    <Window.Resources>
+        <Style x:Key="StyleDungeonButton" TargetType="Button">
+            <Setter Property="Background" Value="DarkSlateGray"/>
+            <Setter Property="FontWeight" Value="ExtraBlack"/>
+            <Setter Property="Foreground" Value="Navy"/>
+
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -16,8 +24,8 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="1" Grid.Column="0" Margin="25" Content="Save" FontSize="50"/>
-        <Button Grid.Row="1" Grid.Column="1" Margin="25" Content="Inventory" FontSize="50" Click="BtnInventory_Click"/>
+        <Button Grid.Row="1" Grid.Column="0" Margin="25" Content="Save" FontSize="50" Style="{StaticResource StyleDungeonButton}"/>
+        <Button Grid.Row="1" Grid.Column="1" Margin="25" Content="Inventory" FontSize="50" Click="BtnInventory_Click" Style="{StaticResource StyleDungeonButton}"/>
 
         <Grid Grid.Row="0" Grid.ColumnSpan="2">
             <UniformGrid x:Name="Map" Rows="16" Columns="27" Background="HotPink"/>
