@@ -34,12 +34,12 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <TextBlock x:Name="Txtb_NoItems" Text="No items yet, keep playing!" FontSize="20" Foreground="White" Grid.Row="1" Grid.RowSpan="2"  Margin="25" Visibility="Visible"/>
-        <TextBox x:Name="PlayerStats" Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="2" Margin="15" Background="DarkSlateGray" Foreground="White">
-        </TextBox>
+        <TextBox x:Name="PlayerStats" Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="2" Margin="15" Background="DarkSlateGray" Foreground="White"/>
 
-        <TextBox x:Name="ItemDescription" Grid.Row="4" Grid.Column="1" Grid.RowSpan="3" Margin="15" Grid.ColumnSpan="2" Background="DarkSlateGray" Foreground="Gold">
-        
-        </TextBox>
+
+        <TextBox x:Name="ItemDescription" Grid.Row="4" Grid.Column="1" Grid.RowSpan="3" Margin="15" Grid.ColumnSpan="2" Background="DarkSlateGray" Foreground="Gold"/>
+
+
         <Button Grid.Column="1" Margin="15, 10, 15, 40" Grid.Row="7" x:Name="Back" Content="Back To Game" FontSize="25" FontWeight="Bold" Grid.RowSpan="2" Click="BtnBack_Clicked"/>
 
         <Button Grid.Column="2" Margin="15, 10, 15, 40" Grid.Row="7" Content="Use" FontSize="25" FontWeight="Bold" Grid.RowSpan="2" Click="BtnUse_Clicked"/>
