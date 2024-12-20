@@ -33,7 +33,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-
+        <TextBlock x:Name="Txtb_NoItems" Text="No items yet, keep playing!" FontSize="20" Foreground="White" Grid.Row="2" Grid.RowSpan="2"  Margin="25" Visibility="Visible"/>
         <TextBox x:Name="PlayerStats" Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="2" Margin="15" Background="DarkSlateGray" Foreground="White">
         </TextBox>
 
