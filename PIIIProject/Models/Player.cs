@@ -13,6 +13,7 @@ namespace PIIIProject.Models
 
         private int _currentX, _currentY;
         private int _health;
+        private List<Item> _inventory;
 
         public int Health
         {
@@ -26,11 +27,23 @@ namespace PIIIProject.Models
             }
         }
 
+        public List<Item> Inventory
+        {
+            get { return _inventory; }
+            set
+            {
+                if (value is null)
+                    throw new ArgumentNullException("The item cannot be null.");
+                _inventory = value;
+            }
+        }
+
         public Player(GameMap map, int spawnX, int spawnY)
         {
             _currentX = spawnX;
             _currentY = spawnY;
             _health = STARTING_HEALTH;
+            _inventory = new List<Item>();
 
             map.AddThing(this, spawnX, spawnY);
         } 
@@ -63,13 +76,23 @@ namespace PIIIProject.Models
             if (nextY < 0 || nextY >= map.LogicMap.GetLength(0) || nextX < 0 || nextX >= map.LogicMap.GetLength(1))
                 return;
 
-            foreach (object thing in map.LogicMap[nextY, nextX])
+            foreach (IMapObject thing in map.LogicMap[nextY, nextX])
                 if (thing is ICollidable)
                     return;
 
             map.MoveThing(this, _currentX, _currentY, direction);
             _currentX = nextX;
             _currentY = nextY;
+
+            // Can't remove stuff while iterating through it
+            foreach (IMapObject thing in map.LogicMap[_currentY, _currentX])
+            {
+                if (thing is Item)
+                {
+                    Inventory.Add(thing as Item);
+                    map.RemoveThing(thing, _currentX, _currentY);
+                }
+            }
         }
     }
 }
