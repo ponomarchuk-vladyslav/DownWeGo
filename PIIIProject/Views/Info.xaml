@@ -8,14 +8,18 @@
         Title="Info" Height="450" Width="800" Background="Black">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="150"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
-        <Label Content="INFO" FontSize="50" Foreground="White" HorizontalAlignment="Center" Grid.Row="0"/>
-        <Label Content="W, A, S, D To move" Foreground="White" HorizontalAlignment="Center" Grid.Row="1" FontSize="50"/>
-        <Label Content="Button opens inventory" Foreground="White" HorizontalAlignment="Center" Grid.Row="2" FontSize="50"/>
-        <Button Content="Back To Main Menu" FontSize="25" Grid.Row="3" Margin="150, 25, 150, 25" Click="BtnMainMenu_Clicked"/>
+        <Label Content="INFO" FontSize="45" Foreground="White" HorizontalAlignment="Center" Grid.Row="0" FontWeight="ExtraBlack"/>
+        <Label Content="W, A, S, D To move" Foreground="White" HorizontalAlignment="Center" Grid.Row="1" FontSize="30"/>
+        <Label Content="Button opens inventory" Foreground="White" HorizontalAlignment="Center" Grid.Row="2" FontSize="30"/>
+        <Label Content="Click on items in left box in inventory and then 'Use' to use them" Foreground="White" FontSize="30" HorizontalAlignment="Center" Grid.Row="3"/>
+        <Label Content="You must kill enemies and the boss to escape!" Foreground="White" FontSize="30" HorizontalAlignment="Center" Grid.Row="4"/>
+        <Button Content="Back To Main Menu" FontSize="25" Grid.Row="5" Margin="150, 25, 150, 25" Click="BtnMainMenu_Clicked"/>
     </Grid>
 </Window>
