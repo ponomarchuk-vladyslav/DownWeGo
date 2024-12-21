@@ -34,22 +34,9 @@ namespace PIIIProject.Views
             InitializeComponent();
 
             _map = new GameMap(Rows, Columns);
-            _player = new Player(0, 7);
-            _map.AddThing(_player, _player.CurrentX, _player.CurrentY);
-
-            for (int i = 0; i < 5; i++)
-            {
-                _map.AddThing(new Wall(), 5, 5 + i);
-            }
-
-            _map.AddThing(new HealthPotion(), 7, 7);
-            _map.AddThing(new HealthPotion(), 7, 7);
-            _map.AddThing(new HealthPotion(), 3, 2);
-            _map.AddThing(new HealthPotion(), 15, 5);
-
-            _map.AddThing(new Enemy(3), 10, 10);
-
-            _map.AddWall(25, 15, 20, 3);
+            _player = new Player(22, 12);
+            
+            ConstructMap();
 
             UpdateDisplay(_map, _player);
         }
@@ -165,6 +152,56 @@ namespace PIIIProject.Views
             Inventory inventory = new Inventory(_player);
 
             inventory.Show();
+        }
+
+        private void ConstructMap()
+        {
+            _map.AddThing(_player, _player.CurrentX, _player.CurrentY);
+
+
+            _map.AddWall(0, 0, 0, 15);
+            _map.AddWall(0, 15, 26, 15);
+            _map.AddWall(26, 15, 26, 0);
+            _map.AddWall(26, 0, 0, 0);
+
+            _map.AddWall(7, 9, 7, 13);
+            _map.AddWall(7, 9, 2, 9);
+            _map.AddWall(7, 9, 2, 9);
+            _map.AddWall(7, 9, 15, 9);
+            _map.AddWall(15, 9, 20, 9);
+            _map.AddWall(20, 9, 20, 13);
+            _map.AddWall(20, 13, 25, 13);
+            _map.AddWall(7, 9, 7, 4);
+            _map.AddWall(4, 0, 4, 1);
+            _map.AddWall(4, 3, 4, 4);
+            _map.AddWall(4, 4, 0, 4);
+            _map.AddWall(4, 4, 0, 4);
+            _map.AddWall(22, 0, 22, 1);
+            _map.AddWall(22, 3, 22, 4);
+            _map.AddWall(22, 4, 23, 4);
+            _map.AddWall(25, 4, 26, 4);
+            _map.AddWall(22, 4, 22, 9);
+            _map.AddWall(22, 9, 23, 9);
+            _map.AddWall(25, 9, 26, 9);
+            _map.AddWall(21, 4, 9, 4);
+            _map.AddWall(16, 7, 16, 4);
+            _map.AddWall(16, 7, 18, 7);
+            _map.AddWall(21, 7, 20, 7);
+
+
+
+
+
+
+
+            _map.AddThing(new HealthPotion(), 7, 7);
+            _map.AddThing(new HealthPotion(), 7, 7);
+            _map.AddThing(new HealthPotion(), 3, 2);
+            _map.AddThing(new HealthPotion(), 15, 5);
+
+            _map.AddThing(new Enemy(3), 10, 10);
+
+
         }
     }
 }
