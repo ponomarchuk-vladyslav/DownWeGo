@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace PIIIProject.Models
 {
@@ -109,6 +110,80 @@ namespace PIIIProject.Models
             }
 
             _logicMap[thingY, thingX].Remove(thing);
+        }
+
+        public void AddWall(int startX, int startY, int endX, int endY)
+        {
+            int temp;
+            decimal coord;
+            decimal increment = 0;
+
+            if ((startX > endX || startX == endX) && (startY > endY || startY == endY))
+            {
+                temp = startX;
+                startX = endX;
+                endX = temp;
+
+                temp = startY;
+                startY = endY;
+                endY = temp;
+            }
+
+            if (endX - startX > endY - startY)
+            {
+                increment = (decimal)(endY - startY) / (decimal)(endX - startX);
+
+                coord = startY;
+                for (int x = startX; x <= endX; x++)
+                {
+                    if ((x - startX) % (endX - startX) == 0)
+                    {
+                        coord = Math.Round(coord);
+                    }
+                    if (!MapCellHasCollidable(x, (int)Math.Ceiling(coord)))
+                    {
+                        AddThing(new Wall(), x, (int)Math.Ceiling(coord));
+                    }
+                    if (!MapCellHasCollidable(x, (int)coord))
+                    {
+                        AddThing(new Wall(), x, (int)coord);
+                    }
+                    coord += increment;
+                }
+            }
+            else
+            {
+                increment = (decimal)(endX - startX) / (decimal)(endY - startY);
+
+                coord = startX;
+                for (int y = startY; y <= endY; y++)
+                {
+                    if ((y - startY) % (endY - startY) == 0)
+                    {
+                        coord = Math.Round(coord);
+                    }
+                    if (!MapCellHasCollidable((int)Math.Ceiling(coord), y))
+                    {
+                        AddThing(new Wall(), (int)Math.Ceiling(coord), y);
+                    }
+                    if (!MapCellHasCollidable((int)coord, y))
+                    {
+                        AddThing(new Wall(), (int)coord, y);
+                    }
+                    coord += increment;
+                }
+            }
+        }
+
+        public bool MapCellHasCollidable(int cellX, int cellY)
+        {
+            foreach (IMapObject thing in LogicMap[cellY, cellX])
+            {
+                if (thing is ICollidable)
+                    return true;
+            }
+
+            return false;
         }
     }
 }

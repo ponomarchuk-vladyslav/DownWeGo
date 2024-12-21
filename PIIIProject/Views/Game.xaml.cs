@@ -49,6 +49,8 @@ namespace PIIIProject.Views
 
             _map.AddThing(new Enemy(3), 10, 10);
 
+            _map.AddWall(25, 15, 20, 3);
+
             UpdateDisplay(_map, _player);
         }
 
