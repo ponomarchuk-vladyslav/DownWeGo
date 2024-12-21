@@ -88,11 +88,14 @@ namespace PIIIProject.Models
 
         public void Hurt(int amount)
         {
-            Health -= (amount - (Defense * BlockMultiplier));
+            double damage = amount - (Defense * BlockMultiplier);
+            if (damage > 0)
+                Health -= damage;
         }
         public void Heal(int amount)
         {
-            Health += amount;
+            if (amount > 0)
+                Health += amount;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,25 +26,27 @@ namespace PIIIProject.Views
         private Player _player;
         private Enemy _enemy;
 
-        private int _playerDefenseMult;
-        private int _enemyDefenseMult;
-
         public Combat(Player player, Enemy enemy)
         {
             InitializeComponent();
 
             _player = player;
             _enemy = enemy;
+            DisplayAllStats(player, enemy);
         }
 
         private void AttackButton_Click(object sender, RoutedEventArgs e)
         {
             _enemy.Hurt(_player.Strength);
+            EnemyAction(_enemy, _player);
+            DisplayAllStats(_player, _enemy);
         }
 
         private void BlockButton_Click(object sender, RoutedEventArgs e)
         {
             _player.BlockMultiplier = BLOCK_MULTIPLIER;
+            EnemyAction(_enemy, _player);
+            DisplayAllStats(_player, _enemy);
         }
 
         private void InventoryButton_Click(object sender, RoutedEventArgs e)
@@ -59,7 +62,8 @@ namespace PIIIProject.Views
 
         private void DisplayAllStats(Player player, Enemy enemy)
         {
-
+            PlayerStats.Text = player.AllStats;
+            EnemyStats.Text = enemy.AllStats;
         }
 
         private void EnemyAction(Enemy enemy, Player player)
@@ -67,9 +71,9 @@ namespace PIIIProject.Views
             enemy.BlockMultiplier = 1;
             Random rng = new Random();
 
-            if (rng.Next(1) == 0)
+            if (rng.Next(2) == 0)
             {
-                enemy.Hurt(player.Strength);
+                player.Hurt(enemy.Strength);
             }
             else
             {
@@ -77,7 +81,7 @@ namespace PIIIProject.Views
             }
 
             player.BlockMultiplier = 1;
-            
+            DisplayAllStats(player, enemy);
         }
     }
 }

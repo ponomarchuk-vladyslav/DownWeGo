@@ -11,7 +11,7 @@ namespace PIIIProject.Models
     {
         public const string PLAYER_DEFAULT_NAME = "Player";
         public const char PLAYER_DISPLAY_CHAR = '@';
-        private const int STARTING_HEALTH = 25, STARTING_STRENGTH = 1, STARTING_DEFENSE = 1;
+        private const int STARTING_HEALTH = 25, STARTING_STRENGTH = 10, STARTING_DEFENSE = 1;
 
         private int _currentX, _currentY;
         private ObservableCollection<Item> _inventory;
@@ -75,8 +75,15 @@ namespace PIIIProject.Models
                 return;
 
             foreach (IMapObject thing in map.LogicMap[nextY, nextX])
+            {
                 if (thing is ICollidable)
                     return;
+                else if (thing is Enemy)
+                {
+                    Views.Combat combatWindow = new Views.Combat(this, thing as Enemy);
+                    combatWindow.Show();
+                }
+            }
 
             map.MoveThing(this, _currentX, _currentY, direction);
             _currentX = nextX;
