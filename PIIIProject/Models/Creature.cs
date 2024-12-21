@@ -9,7 +9,8 @@ namespace PIIIProject.Models
     public abstract class Creature
     {
         private string _name;
-        private int _health, _strength, _defense;
+        private int _strength, _defense;
+        private double _health, _blockMultiplier;
 
         public string Name
         {
@@ -21,7 +22,7 @@ namespace PIIIProject.Models
                 _name = value;
             }
         }
-        public int Health
+        public double Health
         {
             get { return _health; }
             private set
@@ -34,14 +35,14 @@ namespace PIIIProject.Models
         public int Strength
         {
             get { return _strength; }
-            set
+            private set
             {
                 _strength = value;
                 if (value < 0)
                     _strength = 0;
             }
         }
-        public int Defense
+        private int Defense
         {
             get { return _defense; }
             set
@@ -49,6 +50,16 @@ namespace PIIIProject.Models
                 _defense = value;
                 if (value < 0)
                     _defense = 0;
+            }
+        }
+        public double BlockMultiplier
+        {
+            get { return _blockMultiplier; }
+            set
+            {
+                _blockMultiplier = value;
+                if (value < 0)
+                    _blockMultiplier = 0;
             }
         }
         public bool IsDead
@@ -77,7 +88,7 @@ namespace PIIIProject.Models
 
         public void Hurt(int amount)
         {
-            Health -= (amount - Defense);
+            Health -= (amount - (Defense * BlockMultiplier));
         }
         public void Heal(int amount)
         {

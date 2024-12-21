@@ -40,10 +40,10 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Button Grid.Row="3" Grid.Column="0" Style="{StaticResource StyleCombatButton}" Content="Fight"/>
-        <Button Grid.Row="3" Grid.Column="1" Style="{StaticResource StyleCombatButton}" Content="Block"/>
-        <Button Grid.Row="3" Grid.Column="2" Style="{StaticResource StyleCombatButton}" Content="Inventory"/>
-        <Button Grid.Row="3" Grid.Column="3" Style="{StaticResource StyleCombatButton}" Content="Run Away"/>
+        <Button Grid.Row="3" Grid.Column="0" Style="{StaticResource StyleCombatButton}" Content="Attack" Click="AttackButton_Click"/>
+        <Button Grid.Row="3" Grid.Column="1" Style="{StaticResource StyleCombatButton}" Content="Block" Click="BlockButton_Click"/>
+        <Button Grid.Row="3" Grid.Column="2" Style="{StaticResource StyleCombatButton}" Content="Inventory" Click="InventoryButton_Click"/>
+        <Button Grid.Row="3" Grid.Column="3" Style="{StaticResource StyleCombatButton}" Content="Run Away" Click="RunAwayButton_Click"/>
 
     </Grid>
 </Window>

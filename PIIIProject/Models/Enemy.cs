@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PIIIProject.Models
 {
-    class Enemy : Creature, IMapObject, ICollidable
+    public class Enemy : Creature, IMapObject, ICollidable
     {
         public const string ENEMY_DEFAULT_NAME = "Skeleton";
         public const char ENEMY_DISPLAY_CHAR = 'X';
