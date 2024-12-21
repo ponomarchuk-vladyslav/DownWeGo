@@ -187,19 +187,22 @@ namespace PIIIProject.Views
             _map.AddWall(16, 7, 16, 4);
             _map.AddWall(16, 7, 18, 7);
             _map.AddWall(21, 7, 20, 7);
+            
 
 
 
 
 
 
+            _map.AddThing(new HealthPotion(), 24, 12);
+            _map.AddThing(new HealthPotion(), 10, 6);
+            _map.AddThing(new HealthPotion(), 1, 2);
+            _map.AddThing(new HealthPotion(), 19, 5);
 
-            _map.AddThing(new HealthPotion(), 7, 7);
-            _map.AddThing(new HealthPotion(), 7, 7);
-            _map.AddThing(new HealthPotion(), 3, 2);
-            _map.AddThing(new HealthPotion(), 15, 5);
+            _map.AddThing(new Enemy(3), 3, 2);
+            _map.AddThing(new Enemy(4), 19, 6);
+            _map.AddThing(new Enemy(5), 24, 9);
 
-            _map.AddThing(new Enemy(3), 10, 10);
 
 
         }
