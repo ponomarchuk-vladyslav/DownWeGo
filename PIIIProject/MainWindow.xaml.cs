@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PIIIProject.Models;
 
 namespace PIIIProject
 {
@@ -34,10 +35,17 @@ namespace PIIIProject
 
         private void Btn_LoadClicked(object sender, RoutedEventArgs e)
         {
-            
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            
 
+            //OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            Player tempP = null;
+            GameMap tempGM = null;
+
+            SaverLoader.Load(ref tempP, ref tempGM);
+
+            Game game = new Game(tempP, tempGM);
+            game.Show();
+            this.Close();
         }
 
         private void Btn_InfoClicked(object sender, RoutedEventArgs e)

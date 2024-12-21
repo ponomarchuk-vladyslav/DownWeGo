@@ -29,19 +29,25 @@ namespace PIIIProject.Models
         public int CurrentX
         {
             get { return _currentX; }
+            set
+            {
+                _currentX = value;
+            }
         }
         public int CurrentY
         {
             get { return _currentY; }
+            set
+            {
+                _currentY = value;
+            }
         }
 
-        public Player(GameMap map, int spawnX, int spawnY) : base(PLAYER_DEFAULT_NAME, STARTING_HEALTH, STARTING_STRENGTH, STARTING_DEFENSE)
+        public Player(int spawnX, int spawnY) : base(PLAYER_DEFAULT_NAME, STARTING_HEALTH, STARTING_STRENGTH, STARTING_DEFENSE)
         {
             _currentX = spawnX;
             _currentY = spawnY;
             _inventory = new ObservableCollection<Item>();
-
-            map.AddThing(this, spawnX, spawnY);
         } 
 
         public char GetMapDisplayChar()
@@ -49,7 +55,7 @@ namespace PIIIProject.Models
             return PLAYER_DISPLAY_CHAR; 
         }
 
-        public void MovePlayer(GameMap.Direction direction, GameMap map)
+        public Enemy MovePlayer(GameMap.Direction direction, GameMap map)
         {
             int nextX = _currentX, nextY = _currentY;
 
@@ -72,16 +78,16 @@ namespace PIIIProject.Models
             }
 
             if (nextY < 0 || nextY >= map.LogicMap.GetLength(0) || nextX < 0 || nextX >= map.LogicMap.GetLength(1))
-                return;
+                return null;
 
             foreach (IMapObject thing in map.LogicMap[nextY, nextX])
             {
                 if (thing is ICollidable)
-                    return;
+                    return null;
                 else if (thing is Enemy)
                 {
-                    Views.Combat combatWindow = new Views.Combat(this, thing as Enemy);
-                    combatWindow.Show();
+                    if (thing as Enemy is not null)
+                        return thing as Enemy;
                 }
             }
 
@@ -97,6 +103,8 @@ namespace PIIIProject.Models
                     map.RemoveThing(map.LogicMap[_currentY, _currentX][i], _currentX, _currentY);
                 }
             }
+
+            return null;
         }
     }
 }

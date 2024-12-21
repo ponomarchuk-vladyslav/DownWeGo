@@ -25,7 +25,7 @@ namespace PIIIProject.Models
         public double Health
         {
             get { return _health; }
-            private set
+            set
             {
                 _health = value;
                 if (value < 0)
@@ -35,7 +35,7 @@ namespace PIIIProject.Models
         public int Strength
         {
             get { return _strength; }
-            private set
+            set
             {
                 _strength = value;
                 if (value < 0)

@@ -34,8 +34,8 @@ namespace PIIIProject.Views
             InitializeComponent();
 
             _map = new GameMap(Rows, Columns);
-
-            _player = new Player(_map, 0, 7);
+            _player = new Player(0, 7);
+            _map.AddThing(_player, _player.CurrentX, _player.CurrentY);
 
             for (int i = 0; i < 5; i++)
             {
@@ -52,24 +52,44 @@ namespace PIIIProject.Views
             UpdateDisplay(_map, _player);
         }
 
+        public Game(Player player, GameMap map)
+        {
+            InitializeComponent();
+
+            _map = map;
+            _player = player;
+
+            UpdateDisplay(_map, _player);
+        }
+
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
+            Enemy enemyContact;
             switch (e.Key)
             {
                 case Key.W:
-                    _player.MovePlayer(GameMap.Direction.Up, _map);
+                    enemyContact = _player.MovePlayer(GameMap.Direction.Up, _map);
                     break;
                 case Key.S:
-                    _player.MovePlayer(GameMap.Direction.Down, _map);
+                    enemyContact = _player.MovePlayer(GameMap.Direction.Down, _map);
                     break;
                 case Key.D:
-                    _player.MovePlayer(GameMap.Direction.Right, _map);
+                    enemyContact = _player.MovePlayer(GameMap.Direction.Right, _map);
                     break;
                 case Key.A:
-                    _player.MovePlayer(GameMap.Direction.Left, _map);
+                    enemyContact = _player.MovePlayer(GameMap.Direction.Left, _map);
                     break;
                 default:
+                    enemyContact = null;
                     break;
+            }
+
+            if (enemyContact is not null)
+            {
+                Combat combatScreen = new Combat(_player, enemyContact);
+                combatScreen.Show();
+                SaverLoader.Save(_player, _map);
+                this.Close();
             }
 
             UpdateDisplay(_map, _player);
