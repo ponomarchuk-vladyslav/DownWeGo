@@ -40,10 +40,18 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Button Grid.Row="3" Grid.Column="0" Style="{StaticResource StyleCombatButton}" Content="Attack" Click="AttackButton_Click"/>
-        <Button Grid.Row="3" Grid.Column="1" Style="{StaticResource StyleCombatButton}" Content="Block" Click="BlockButton_Click"/>
-        <Button Grid.Row="3" Grid.Column="2" Style="{StaticResource StyleCombatButton}" Content="Inventory" Click="InventoryButton_Click"/>
-        <Button Grid.Row="3" Grid.Column="3" Style="{StaticResource StyleCombatButton}" Content="Run Away" Click="RunAwayButton_Click"/>
-
+        <Button Grid.Row="3" Grid.Column="0" Style="{StaticResource StyleCombatButton}" Content="Fight"/>
+        <Button Grid.Row="3" Grid.Column="1" Style="{StaticResource StyleCombatButton}" Content="Block"/>
+        <Button Grid.Row="3" Grid.Column="2" Style="{StaticResource StyleCombatButton}" Content="Inventory"/>
+        <Button Grid.Row="3" Grid.Column="3" Style="{StaticResource StyleCombatButton}" Content="Run Away"/>
+        <Border BorderBrush="Lime" BorderThickness="5" Margin="15" Grid.RowSpan="3">
+            <TextBlock Background="Black" Text="Stats" Foreground="DarkOrange" FontWeight="Bold" FontSize="25" HorizontalAlignment="Center"/>
+        </Border>
+        <Border Grid.Column="1" Grid.ColumnSpan="2" Margin="15" BorderThickness="5" BorderBrush="Yellow">
+            <TextBlock Text="Enemy" Foreground="DarkOrange" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="35" FontWeight="Bold"/>
+        </Border>
+        <Border BorderBrush="Red" BorderThickness="5" Margin="15" Grid.RowSpan="3" Grid.Column="4">
+            <TextBlock Background="Black" Grid.Column="0" Text="Enemy Stats" Foreground="DarkOrange" FontWeight="Bold" FontSize="25" HorizontalAlignment="Center"/>
+        </Border>
     </Grid>
 </Window>
