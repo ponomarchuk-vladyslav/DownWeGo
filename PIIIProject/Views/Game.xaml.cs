@@ -201,7 +201,12 @@ namespace PIIIProject.Views
 
             _map.AddThing(new Enemy(3), 3, 2);
             _map.AddThing(new Enemy(4), 19, 6);
-            _map.AddThing(new Enemy(5), 24, 9);
+            _map.AddThing(new Enemy(5), 24, 10);
+            _map.AddThing(new Enemy(3), 15, 8);
+            _map.AddThing(new Enemy(6), 1, 10);
+            _map.AddThing(new Enemy(7), 8, 14);
+            _map.AddThing(new Enemy(7), 8, 5);
+
 
 
 
