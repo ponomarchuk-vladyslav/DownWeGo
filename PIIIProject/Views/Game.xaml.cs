@@ -23,8 +23,8 @@ namespace PIIIProject.Views
     /// </summary>
     public partial class Game : Window
     {
-        const int GAMEMAP_COLUMNS = 75;
-        const int GAMEMAP_ROWS = 35;
+        const int GAMEMAP_COLUMNS = 27;
+        const int GAMEMAP_ROWS = 16;
 
         private GameMap _map;
         private Player _player;
@@ -34,13 +34,15 @@ namespace PIIIProject.Views
             InitializeComponent();
 
             _map = new GameMap(GAMEMAP_ROWS, GAMEMAP_COLUMNS);
-            _player = new Player(0, 7);
+            _player = new Player(22, 12);
             _map.AddThing(_player, _player.CurrentX, _player.CurrentY);
 
             for (int i = 0; i < 5; i++)
             {
                 _map.AddThing(new Wall(), 5, 5 + i);
             }
+
+            ConstructMap();
 
             UpdateDisplay(_map, _player);
         }
@@ -160,8 +162,6 @@ namespace PIIIProject.Views
 
         private void ConstructMap()
         {
-            _map.AddThing(_player, _player.CurrentX, _player.CurrentY);
-
 
             _map.AddWall(0, 0, 0, 15);
             _map.AddWall(0, 15, 26, 15);
