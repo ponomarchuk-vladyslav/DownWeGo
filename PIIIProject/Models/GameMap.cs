@@ -18,7 +18,7 @@ namespace PIIIProject.Models
             Right
         }
 
-        public const char DEFAULT_DISPLAY_CHAR = '.';
+        public const char FLOOR_DISPLAY_CHAR = '.';
 
         private List<IMapObject>[,] _logicMap;
 
@@ -35,10 +35,10 @@ namespace PIIIProject.Models
                 {
                     for (int x = 0; x < _logicMap.GetLength(1); x++)
                     {
-                        if (_logicMap[_logicMap.GetLength(0) - (y + 1), x].Count == 0)
-                            display[y, x] = DEFAULT_DISPLAY_CHAR;
+                        if (_logicMap[y, x].Count == 0)
+                            display[y, x] = FLOOR_DISPLAY_CHAR;
                         else
-                            display[y, x] = _logicMap[_logicMap.GetLength(0) - (y + 1), x][_logicMap[_logicMap.GetLength(0) - (y + 1), x].Count - 1].GetMapDisplayChar();
+                            display[y, x] = _logicMap[y, x][_logicMap[y, x].Count - 1].GetMapDisplayChar();
                     }
                 }
 
@@ -177,6 +177,9 @@ namespace PIIIProject.Models
 
         public bool MapCellHasCollidable(int cellX, int cellY)
         {
+            if (cellY < 0 || cellY >= LogicMap.GetLength(0) || cellX < 0 || cellX >= LogicMap.GetLength(1))
+                return false;
+
             foreach (IMapObject thing in LogicMap[cellY, cellX])
             {
                 if (thing is ICollidable)

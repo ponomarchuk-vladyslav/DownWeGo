@@ -23,8 +23,8 @@ namespace PIIIProject.Views
     /// </summary>
     public partial class Game : Window
     {
-        const int Columns = 27;
-        const int Rows = 16;
+        const int GAMEMAP_COLUMNS = 75;
+        const int GAMEMAP_ROWS = 35;
 
         private GameMap _map;
         private Player _player;
@@ -33,7 +33,7 @@ namespace PIIIProject.Views
         {
             InitializeComponent();
 
-            _map = new GameMap(Rows, Columns);
+            _map = new GameMap(GAMEMAP_ROWS, GAMEMAP_COLUMNS);
             _player = new Player(0, 7);
             _map.AddThing(_player, _player.CurrentX, _player.CurrentY);
 
@@ -104,19 +104,22 @@ namespace PIIIProject.Views
             switch (c)
             {
                 case Item.ITEM_DISPLAY_CHAR:
-                    img = "./Sprites/Chest.png";
+                    img = @"\Sprites\Chest.png";
                     break;
                 case Player.PLAYER_DISPLAY_CHAR:
-                    img = "./Sprites/knight.jpg";
+                    img = @"\Sprites\knight.jpg";
                     break;
                 case Wall.WALL_DISPLAY_CHAR:
-                    img = "./Sprites/wall.png";
+                    img = @"\Sprites\wall.png";
                     break;
                 case Enemy.ENEMY_DISPLAY_CHAR:
-                    img = "./Sprites/skeleton.png";
+                    img = @"\Sprites\skeleton.png";
+                    break;
+                case GameMap.FLOOR_DISPLAY_CHAR:
+                    img = @"\Sprites\floor.png";
                     break;
                 default:
-                    img = "./Sprites/wall.png";
+                    img = @"\Sprites\Wall.png";
                     break;
             }
 
@@ -125,37 +128,34 @@ namespace PIIIProject.Views
 
         public void UpdateDisplay(GameMap map, Player player)
         {
-            int heightDifference = player.CurrentY - (Rows / 2);
-            int widthDifference = (Columns / 2) - player.CurrentX;
+            int heightDifference = (Map.Rows / 2) + player.CurrentY;
+            int widthDifference = (Map.Columns / 2) - player.CurrentX;
             char[,] mapDisplay = map.DisplayMap;
             string path;
 
             Map.Children.Clear();
 
-            for (int row = 0; row < Rows; row++)
+            for (int row = 0; row < Map.Rows; row++)
             {
-                for (int column = 0; column < Columns; column++)
+                for (int column = 0; column < Map.Columns; column++)
                 {
-                    TextBlock txt = new TextBlock()
-                    {
-                        HorizontalAlignment = HorizontalAlignment.Center,
-                        VerticalAlignment = VerticalAlignment.Center,
-                        FontSize = 20
-                    };
+                    Image img = new Image();
 
-                    if (row < heightDifference || column < widthDifference || row - heightDifference >= mapDisplay.GetLength(0) || column - widthDifference >= mapDisplay.GetLength(1))
+                    if (heightDifference - row < 0 || column < widthDifference || heightDifference - row >= mapDisplay.GetLength(0) || column - widthDifference >= mapDisplay.GetLength(1))
                     {
-                        txt.Text = "";
+                        path = MapCharToImage('0');
                     }
                     else
                     {
-                        txt.Text = mapDisplay[row - heightDifference, column - widthDifference].ToString();
+                        path = MapCharToImage(mapDisplay[heightDifference - row, column - widthDifference]);
                     }
-                    //Image img = new Image();
-                    //path = MapCharToImage(mapDisplay[i, j]);
-                    //img.Source = new BitmapImage(new Uri(path, UriKind.Relative));
-                    //Map.Children.Add(img);
-                    Map.Children.Add(txt);
+                    img.Source = new BitmapImage(new Uri(path, UriKind.Relative));
+                    img.Stretch = Stretch.Fill;
+                    img.Margin = new Thickness(0.05);
+
+                    //TextBox img = new TextBox();
+                    //img.Text = $"{column - widthDifference}, {heightDifference - row}";
+                    Map.Children.Add(img);
                 }
             }
         }
