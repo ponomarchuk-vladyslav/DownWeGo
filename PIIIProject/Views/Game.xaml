@@ -23,15 +23,19 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="1" Grid.Column="0" Margin="25" Content="Save" FontSize="50" Style="{StaticResource StyleDungeonButton}" Click="BtnSave_Click"/>
-        <Button Grid.Row="1" Grid.Column="1" Margin="25" Content="Inventory" FontSize="50" Click="BtnInventory_Click" Style="{StaticResource StyleDungeonButton}"/>
+        <TextBlock x:Name="HealthDisplay" Grid.Row="1" Grid.Column="0" Foreground="White"/>
+        <TextBlock x:Name="EnemyCountDisplay" Grid.Row="1" Grid.Column="1" Foreground="White"/>
+        <Button Grid.Row="1" Grid.Column="2" Margin="25" Content="Save" FontSize="50" Style="{StaticResource StyleDungeonButton}" Click="BtnSave_Click"/>
+        <Button Grid.Row="1" Grid.Column="3" Margin="25" Content="Inventory" FontSize="50" Click="BtnInventory_Click" Style="{StaticResource StyleDungeonButton}"/>
 
-        <Grid Grid.Row="0" Grid.ColumnSpan="2">
+        <Grid Grid.Row="0" Grid.ColumnSpan="4">
             <UniformGrid x:Name="Background" Rows="21" Columns="35" Background="White"/>
         </Grid>
 
-        <Grid Grid.Row="0" Grid.ColumnSpan="2">
+        <Grid Grid.Row="0" Grid.ColumnSpan="4">
             <UniformGrid x:Name="Map" Rows="21" Columns="35"/>
         </Grid>
 

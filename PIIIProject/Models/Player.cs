@@ -43,7 +43,7 @@ namespace PIIIProject.Models
             return PLAYER_DISPLAY_CHAR; 
         }
 
-        public Enemy MovePlayer(GameMap.Direction direction, GameMap map)
+        public ICollidable MovePlayer(GameMap.Direction direction, GameMap map)
         {
             int nextX = _currentX, nextY = _currentY;
 
@@ -71,12 +71,7 @@ namespace PIIIProject.Models
             foreach (IMapObject thing in map.LogicMap[nextY, nextX])
             {
                 if (thing is ICollidable)
-                    return null;
-                else if (thing is Enemy)
-                {
-                    if (thing as Enemy is not null)
-                        return thing as Enemy;
-                }
+                    return thing as ICollidable;
             }
 
             map.MoveThing(this, _currentX, _currentY, direction);

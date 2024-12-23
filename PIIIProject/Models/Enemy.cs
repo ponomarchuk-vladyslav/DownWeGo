@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace PIIIProject.Models
 {
-    public class Enemy : Creature, IMapObject
+    public class Enemy : Creature, IMapObject, ICollidable
     {
+        private static int _enemyCount = 0;
+
+        public static int EnemyCount
+        {
+            get { return _enemyCount; }
+        }
+
         public const string ENEMY_DEFAULT_NAME = "Skeleton";
         public const string BOSS_DEFAULT_NAME = "Abomination";
         public const char ENEMY_DISPLAY_CHAR = 'x';
@@ -15,7 +22,20 @@ namespace PIIIProject.Models
         public const int BOSS_LEVEL_THRESHOLD = 15;
         public const int START_HEALTH = 10, START_STRENGTH = 2, START_DEFENSE = 1;
 
+        private int _level;
         private bool _isBoss;
+
+        public int Level
+        {
+            get { return _level; }
+            set
+            {
+                _level = value;
+                if (value < 0)
+                    _level = 1;
+            }
+        }
+
         public char GetMapDisplayChar()
         {
             if (_isBoss)
@@ -25,7 +45,7 @@ namespace PIIIProject.Models
 
         public Enemy() : base()
         {
-
+            _enemyCount++;
         }
 
         public Enemy(GameMap map, int spawnX, int spawnY, int level, string name = ENEMY_DEFAULT_NAME) : base(spawnX, spawnY, name, level * START_HEALTH, level * START_STRENGTH, level * START_DEFENSE)
@@ -37,6 +57,13 @@ namespace PIIIProject.Models
                     Name = BOSS_DEFAULT_NAME;
             }
             map.AddThing(this, spawnX, spawnY);
+
+            _enemyCount++;
+        }
+
+        ~Enemy()
+        {
+            _enemyCount--;
         }
     }
 }

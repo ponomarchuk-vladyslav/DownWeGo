@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PIIIProject.Models
 {
-    class Escape : IMapObject
+    class Escape : IMapObject, ICollidable
     {
         public const char ESCAPE_DISPLAY_CHAR = 'M';
 

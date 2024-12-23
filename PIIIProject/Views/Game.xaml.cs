@@ -36,11 +36,6 @@ namespace PIIIProject.Views
             _map = new GameMap(GAMEMAP_ROWS, GAMEMAP_COLUMNS);
             _player = new Player(_map, 22, 12);
 
-            for (int i = 0; i < 5; i++)
-            {
-                _map.AddThing(new Wall(), 5, 5 + i);
-            }
-
             ConstructMap();
 
             InitializeBackground();
@@ -60,31 +55,38 @@ namespace PIIIProject.Views
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            Enemy enemyContact;
+            ICollidable contact;
             switch (e.Key)
             {
                 case Key.W:
-                    enemyContact = _player.MovePlayer(GameMap.Direction.Up, _map);
+                    contact = _player.MovePlayer(GameMap.Direction.Up, _map);
                     break;
                 case Key.S:
-                    enemyContact = _player.MovePlayer(GameMap.Direction.Down, _map);
+                    contact = _player.MovePlayer(GameMap.Direction.Down, _map);
                     break;
                 case Key.D:
-                    enemyContact = _player.MovePlayer(GameMap.Direction.Right, _map);
+                    contact = _player.MovePlayer(GameMap.Direction.Right, _map);
                     break;
                 case Key.A:
-                    enemyContact = _player.MovePlayer(GameMap.Direction.Left, _map);
+                    contact = _player.MovePlayer(GameMap.Direction.Left, _map);
                     break;
                 default:
-                    enemyContact = null;
+                    contact = null;
                     break;
             }
 
-            if (enemyContact is not null)
+            if (contact is Enemy)
             {
-                Combat combatScreen = new Combat(_map, _player, enemyContact);
+                Combat combatScreen = new Combat(_map, _player, contact as Enemy);
                 combatScreen.Show();
                 SaverLoader.Save(_player, _map);
+                this.Close();
+            }
+
+            if (contact is Escape && Enemy.EnemyCount <= 0)
+            {
+                GameOver gameOverScreen = new GameOver(true);
+                gameOverScreen.Show();
                 this.Close();
             }
 
@@ -101,7 +103,7 @@ namespace PIIIProject.Views
                     img = @"\Sprites\Chest.png";
                     break;
                 case Player.PLAYER_DISPLAY_CHAR:
-                    img = @"\Sprites\knight.jpg";
+                    img = @"\Sprites\knight.png";
                     break;
                 case Wall.WALL_DISPLAY_CHAR:
                     img = @"\Sprites\wall.png";
@@ -156,6 +158,9 @@ namespace PIIIProject.Views
                     Map.Children.Add(img);
                 }
             }
+
+            HealthDisplay.Text = $"Health: {player.Health}";
+            EnemyCountDisplay.Text = $"Enemies left: {Enemy.EnemyCount}";
         }
 
         public void InitializeBackground()
@@ -203,7 +208,6 @@ namespace PIIIProject.Views
             _map.AddWall(4, 0, 4, 1);
             _map.AddWall(4, 3, 4, 4);
             _map.AddWall(4, 4, 0, 4);
-            _map.AddWall(4, 4, 0, 4);
             _map.AddWall(22, 0, 22, 1);
             _map.AddWall(22, 3, 22, 4);
             _map.AddWall(22, 4, 23, 4);
@@ -231,9 +235,7 @@ namespace PIIIProject.Views
             new Enemy(_map, 19, 6, 3);
             new Enemy(_map, 24, 10, 5);
             new Enemy(_map, 15, 8, 3);
-            new Enemy(_map, 1, 10, 6);
-            new Enemy(_map, 8, 14, 7);
-            new Enemy(_map, 8, 5, 20);
+            new Enemy(_map, 8, 5, 10);
 
 
             _map.AddThing(new StrengthPotion(), 22, 11);
@@ -247,6 +249,7 @@ namespace PIIIProject.Views
             _map.AddThing(new StrengthPotion(), 22, 11);
             _map.AddThing(new DefensePotion(), 22, 11);
 
+            _map.AddThing(new Escape(), 21, 12);
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
