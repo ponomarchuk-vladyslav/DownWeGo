@@ -211,8 +211,22 @@ namespace PIIIProject.Views
             new Enemy(_map, 8, 5, 7);
 
 
+            _map.AddThing(new StrengthPotion(), 22, 11);
+            _map.AddThing(new DefensePotion(), 22, 11);
+            _map.AddThing(new StrengthPotion(), 22, 11);
+            _map.AddThing(new DefensePotion(), 22, 11);
+            _map.AddThing(new StrengthPotion(), 22, 11);
+            _map.AddThing(new DefensePotion(), 22, 11);
+            _map.AddThing(new StrengthPotion(), 22, 11);
+            _map.AddThing(new DefensePotion(), 22, 11);
+            _map.AddThing(new StrengthPotion(), 22, 11);
+            _map.AddThing(new DefensePotion(), 22, 11);
 
+        }
 
+        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        {
+            SaverLoader.Save(_player,  _map);
         }
     }
 }

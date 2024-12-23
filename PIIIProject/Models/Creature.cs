@@ -60,7 +60,7 @@ namespace PIIIProject.Models
                     _strength = 0;
             }
         }
-        private int Defense
+        public int Defense
         {
             get { return _defense; }
             set

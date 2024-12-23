@@ -11,7 +11,7 @@ namespace PIIIProject.Models
     {
         public const string PLAYER_DEFAULT_NAME = "Player";
         public const char PLAYER_DISPLAY_CHAR = '@';
-        private const int STARTING_HEALTH = 25, STARTING_STRENGTH = 10, STARTING_DEFENSE = 1;
+        private const int STARTING_HEALTH = 25, STARTING_STRENGTH = 10, STARTING_DEFENSE = 0;
 
         private ObservableCollection<Item> _inventory;
 
