@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PIIIProject.Views"
         mc:Ignorable="d"
-        Title="Game" Height="900" Width="1600" KeyDown="Window_KeyDown" Background="Black">
+        Title="Game" Height="900" Width="1600" KeyDown="Window_KeyDown" Background="Gray">
     <Window.Resources>
         <Style x:Key="StyleDungeonButton" TargetType="Button">
             <Setter Property="Background" Value="DarkSlateGray"/>
             <Setter Property="FontWeight" Value="ExtraBlack"/>
-            <Setter Property="Foreground" Value="Navy"/>
+            <Setter Property="Foreground" Value="LightBlue"/>
 
         </Style>
     </Window.Resources>
