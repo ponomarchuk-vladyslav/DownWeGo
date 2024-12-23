@@ -34,8 +34,7 @@ namespace PIIIProject.Views
             InitializeComponent();
 
             _map = new GameMap(GAMEMAP_ROWS, GAMEMAP_COLUMNS);
-            _player = new Player(22, 12);
-            _map.AddThing(_player, _player.CurrentX, _player.CurrentY);
+            _player = new Player(_map, 22, 12);
 
             for (int i = 0; i < 5; i++)
             {
@@ -81,7 +80,7 @@ namespace PIIIProject.Views
 
             if (enemyContact is not null)
             {
-                Combat combatScreen = new Combat(_player, enemyContact);
+                Combat combatScreen = new Combat(_map, _player, enemyContact);
                 combatScreen.Show();
                 SaverLoader.Save(_player, _map);
                 this.Close();
@@ -203,13 +202,13 @@ namespace PIIIProject.Views
             _map.AddThing(new HealthPotion(), 1, 2);
             _map.AddThing(new HealthPotion(), 19, 5);
 
-            _map.AddThing(new Enemy(3), 3, 2);
-            _map.AddThing(new Enemy(4), 19, 6);
-            _map.AddThing(new Enemy(5), 24, 10);
-            _map.AddThing(new Enemy(3), 15, 8);
-            _map.AddThing(new Enemy(6), 1, 10);
-            _map.AddThing(new Enemy(7), 8, 14);
-            _map.AddThing(new Enemy(7), 8, 5);
+            new Enemy(_map, 3, 2, 3);
+            new Enemy(_map, 19, 6, 3);
+            new Enemy(_map, 24, 10, 5);
+            new Enemy(_map, 15, 8, 3);
+            new Enemy(_map, 1, 10, 6);
+            new Enemy(_map, 8, 14, 7);
+            new Enemy(_map, 8, 5, 7);
 
 
 

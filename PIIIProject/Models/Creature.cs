@@ -11,6 +11,24 @@ namespace PIIIProject.Models
         private string _name;
         private int _strength, _defense;
         private double _health, _blockMultiplier;
+        protected int _currentX, _currentY;
+
+        public int CurrentX
+        {
+            get { return _currentX; }
+            set
+            {
+                _currentX = value;
+            }
+        }
+        public int CurrentY
+        {
+            get { return _currentY; }
+            set
+            {
+                _currentY = value;
+            }
+        }
 
         public string Name
         {
@@ -78,12 +96,20 @@ namespace PIIIProject.Models
             }
         }
 
-        public Creature(string name, int health, int strength, int defense)
+        public Creature()
+        {
+
+        }
+
+        public Creature(int spawnX, int spawnY, string name, int health, int strength, int defense)
         {
             Name = name;
             Health = health;
             Strength = strength;
             Defense = defense;
+
+            CurrentX = spawnX;
+            CurrentY = spawnY;
         }
 
         public void Hurt(int amount)
