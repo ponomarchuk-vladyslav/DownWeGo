@@ -19,9 +19,15 @@ namespace PIIIProject.Views
     /// </summary>
     public partial class GameOver : Window
     {
-        public GameOver()
+        public GameOver(bool win)
         {
             InitializeComponent();
+
+            if (!win)
+            {
+                WinText.Visibility = Visibility.Hidden;
+                LoseText.Visibility = Visibility.Visible;
+            }
         }
 
         private void BtnEnd_Clicked(object sender, RoutedEventArgs e)

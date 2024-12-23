@@ -43,6 +43,7 @@ namespace PIIIProject.Views
 
             ConstructMap();
 
+            InitializeBackground();
             UpdateDisplay(_map, _player);
         }
 
@@ -53,6 +54,7 @@ namespace PIIIProject.Views
             _map = map;
             _player = player;
 
+            InitializeBackground();
             UpdateDisplay(_map, _player);
         }
 
@@ -108,7 +110,13 @@ namespace PIIIProject.Views
                     img = @"\Sprites\skeleton.png";
                     break;
                 case GameMap.FLOOR_DISPLAY_CHAR:
-                    img = @"\Sprites\floor.png";
+                    img = "";
+                    break;
+                case Enemy.BOSS_DISPLAY_CHAR:
+                    img = @"\Sprites\Boss.png";
+                    break;
+                case Escape.ESCAPE_DISPLAY_CHAR:
+                    img = @"\Sprites\Escape.png";
                     break;
                 default:
                     img = @"\Sprites\Wall.png";
@@ -145,9 +153,26 @@ namespace PIIIProject.Views
                     img.Stretch = Stretch.Fill;
                     img.Margin = new Thickness(0.05);
 
-                    //TextBox img = new TextBox();
-                    //img.Text = $"{column - widthDifference}, {heightDifference - row}";
                     Map.Children.Add(img);
+                }
+            }
+        }
+
+        public void InitializeBackground()
+        {
+            Background.Rows = Map.Rows;
+            Background.Columns = Map.Columns;
+
+            for (int row = 0; row < Background.Rows; row++)
+            {
+                for (int column = 0; column < Background.Columns; column++)
+                {
+                    Image img = new Image();
+                    img.Source = new BitmapImage(new Uri(@"\Sprites\Floor.png", UriKind.Relative));
+                    img.Stretch = Stretch.Fill;
+                    img.Margin = new Thickness(0.05);
+
+                    Background.Children.Add(img);
                 }
             }
         }
@@ -208,7 +233,7 @@ namespace PIIIProject.Views
             new Enemy(_map, 15, 8, 3);
             new Enemy(_map, 1, 10, 6);
             new Enemy(_map, 8, 14, 7);
-            new Enemy(_map, 8, 5, 7);
+            new Enemy(_map, 8, 5, 20);
 
 
             _map.AddThing(new StrengthPotion(), 22, 11);

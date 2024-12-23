@@ -92,6 +92,12 @@ namespace PIIIProject.Views
 
             player.BlockMultiplier = 1;
             DisplayAllStats(player, enemy);
+            if (player.IsDead)
+            {
+                GameOver gameOverScreen = new GameOver(false);
+                gameOverScreen.Show();
+                this.Close();
+            }
         }
     }
 }

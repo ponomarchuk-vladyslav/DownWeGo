@@ -16,8 +16,8 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <TextBlock Text="You Win, Bro!!" Visibility="Visible"/>
-        <TextBlock Text="You Lose, Bro!!" Visibility="Hidden"/>
+        <TextBlock x:Name="WinText" Text="You Win, Bro!!" Visibility="Visible"/>
+        <TextBlock x:Name="LoseText" Text="You Lose, Bro!!" Visibility="Hidden"/>
         <Button Click="BtnEnd_Clicked"  HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="50" Width="500" Height="100" FontSize="50" Content="End Game!! :D" Background="DimGray" FontWeight="ExtraBlack" BorderBrush="DarkSlateBlue" BorderThickness="5" Foreground="Black"/>
     </Grid>
 </Window>

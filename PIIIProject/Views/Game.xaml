@@ -28,7 +28,11 @@
         <Button Grid.Row="1" Grid.Column="1" Margin="25" Content="Inventory" FontSize="50" Click="BtnInventory_Click" Style="{StaticResource StyleDungeonButton}"/>
 
         <Grid Grid.Row="0" Grid.ColumnSpan="2">
-            <UniformGrid x:Name="Map" Rows="21" Columns="35" Background="White"/>
+            <UniformGrid x:Name="Background" Rows="21" Columns="35" Background="White"/>
+        </Grid>
+
+        <Grid Grid.Row="0" Grid.ColumnSpan="2">
+            <UniformGrid x:Name="Map" Rows="21" Columns="35"/>
         </Grid>
 
     </Grid>
