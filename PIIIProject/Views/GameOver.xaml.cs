@@ -24,9 +24,9 @@ namespace PIIIProject.Views
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BtnEnd_Clicked(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
     }
 }
