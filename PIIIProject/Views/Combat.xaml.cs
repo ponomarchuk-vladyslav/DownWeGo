@@ -23,15 +23,17 @@ namespace PIIIProject.Views
     {
         const double BLOCK_MULTIPLIER = 1.5;
 
+        private GameMap _map;
         private Player _player;
         private Enemy _enemy;
 
-        public Combat(Player player, Enemy enemy)
+        public Combat(GameMap map, Player player, Enemy enemy)
         {
             InitializeComponent();
 
             _player = player;
             _enemy = enemy;
+            _map = map;
             DisplayAllStats(player, enemy);
         }
 
@@ -57,6 +59,8 @@ namespace PIIIProject.Views
 
         private void RunAwayButton_Click(object sender, RoutedEventArgs e)
         {
+            Game game = new Game(_player, _map);
+            game.Show();
             this.Close();
         }
 
@@ -68,6 +72,12 @@ namespace PIIIProject.Views
 
         private void EnemyAction(Enemy enemy, Player player)
         {
+            if (enemy.IsDead)
+            {
+                _map.RemoveThing(enemy, enemy.CurrentX, enemy.CurrentY);
+                RunAwayButton_Click(null, null);
+            }
+
             enemy.BlockMultiplier = 1;
             Random rng = new Random();
 
