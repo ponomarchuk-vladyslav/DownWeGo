@@ -8,18 +8,20 @@
         Title="Info" Height="450" Width="800" Background="Black">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Label Content="INFO" FontSize="45" Foreground="White" HorizontalAlignment="Center" Grid.Row="0" FontWeight="ExtraBlack"/>
-        <Label Content="W, A, S, D To move" Foreground="White" HorizontalAlignment="Center" Grid.Row="1" FontSize="30"/>
-        <Label Content="Button opens inventory" Foreground="White" HorizontalAlignment="Center" Grid.Row="2" FontSize="30"/>
-        <Label Content="Click on items in left box in inventory and then 'Use' to use them" Foreground="White" FontSize="30" HorizontalAlignment="Center" Grid.Row="3"/>
-        <Label Content="You must kill enemies and the boss to escape!" Foreground="White" FontSize="30" HorizontalAlignment="Center" Grid.Row="4"/>
-        <Button Content="Back To Main Menu" FontSize="25" Grid.Row="5" Margin="150, 25, 150, 25" Click="BtnMainMenu_Clicked"/>
+        <Label Content="INFO" FontSize="35" Foreground="White" HorizontalAlignment="Center" Grid.Row="0" FontWeight="ExtraBlack" VerticalAlignment="Top"/>
+
+        <Border Grid.Row="1" Grid.RowSpan="5" BorderThickness="5" BorderBrush="SaddleBrown" Margin="25" Background="DarkSlateGray">
+            <TextBlock Text="You are a knight in a dungeon. W, A, S, D keys move you when you play. Use mouse left-click to navigate the various menus you will see. You will find items around the dungeon. Click 'inventory', the item, and then 'Use' to consume them. You must search for the door to leave the dungeon if you want to win! Enemies will be in the way and you must fight them when you reach them! Good luck!" Foreground="White" HorizontalAlignment="Center" Width="725" TextWrapping="Wrap" LineHeight="44" FontSize="24"/>
+        </Border>
+        
+        <Button Content="Back To Main Menu" FontSize="25" Grid.Row="6" Margin="25, 5, 25, 5" Click="BtnMainMenu_Clicked"/>
     </Grid>
 </Window>
