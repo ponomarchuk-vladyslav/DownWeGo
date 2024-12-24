@@ -11,7 +11,7 @@ namespace PIIIProject.Models
     {
         public const string PLAYER_DEFAULT_NAME = "Player";
         public const char PLAYER_DISPLAY_CHAR = '@';
-        private const int STARTING_HEALTH = 25, STARTING_STRENGTH = 10, STARTING_DEFENSE = 0;
+        private const int STARTING_HEALTH = 25, STARTING_STRENGTH = 10, STARTING_DEFENSE = 0, STARTING_LEVEL = 1;
 
         private ObservableCollection<Item> _inventory;
 
@@ -26,17 +26,15 @@ namespace PIIIProject.Models
             }
         }
 
-        public Player() : base()
+        public Player(int spawnX, int spawnY) : base(spawnX, spawnY, PLAYER_DEFAULT_NAME, STARTING_LEVEL, STARTING_HEALTH, STARTING_STRENGTH, STARTING_DEFENSE)
+        {
+            _inventory = new ObservableCollection<Item>();
+        }
+
+        private Player(int spawnX, int spawnY, string name, int level, int health, int strength, int defense, double blockMult) : base(spawnX, spawnY, name, level, health, strength, defense, blockMult)
         {
 
         }
-
-        public Player(GameMap map, int spawnX, int spawnY) : base(spawnX, spawnY, PLAYER_DEFAULT_NAME, STARTING_HEALTH, STARTING_STRENGTH, STARTING_DEFENSE)
-        {
-            _inventory = new ObservableCollection<Item>();
-
-            map.AddThing(this, CurrentX, CurrentY);
-        } 
 
         public char GetMapDisplayChar()
         { 
@@ -88,6 +86,35 @@ namespace PIIIProject.Models
             }
 
             return null;
+        }
+
+        public string ExportSaveDataAsString()
+        {
+            char div = IMapObject.EXPORT_DIVIDER_CHAR;
+            return $"{CurrentX}{div}{CurrentY}{div}{Name}{div}{Level}{div}{Health}{div}{Strength}{div}{Defense}{div}{BlockMultiplier}";
+        }
+
+        public static IMapObject LoadSaveDataFromString(string saveDataString)
+        {
+            try
+            {
+                string[] saveData = saveDataString.Split(IMapObject.EXPORT_DIVIDER_CHAR);
+
+                int spawnX = int.Parse(saveData[0]);
+                int spawnY = int.Parse(saveData[1]);
+                string name = saveData[2];
+                int level = int.Parse(saveData[3]);
+                int health = int.Parse(saveData[4]);
+                int strength = int.Parse(saveData[5]);
+                int defense = int.Parse(saveData[6]);
+                double blockMult = double.Parse(saveData[7]);
+
+                return new Player(spawnX, spawnY, name, level, health, strength, defense, blockMult);
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

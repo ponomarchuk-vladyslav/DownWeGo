@@ -12,12 +12,24 @@ namespace PIIIProject.Models
 
         public Escape()
         {
-
+            
         }
 
         public char GetMapDisplayChar()
         {
             return ESCAPE_DISPLAY_CHAR;
+        }
+
+        public string ExportSaveDataAsString()
+        {
+            return "";
+        }
+
+        public static IMapObject LoadSaveDataFromString(string saveDataString)
+        {
+            if (string.IsNullOrEmpty(saveDataString))
+                return new Escape();
+            return null;
         }
     }
 }

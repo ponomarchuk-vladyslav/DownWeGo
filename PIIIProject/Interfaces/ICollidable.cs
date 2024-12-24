@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace PIIIProject
 {
+    /// <summary>
+    /// Interface with no implementation. Allows to easily check if an object can be collided with.
+    /// </summary>
     public interface ICollidable
     {
     }

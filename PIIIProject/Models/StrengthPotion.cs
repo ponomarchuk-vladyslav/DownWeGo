@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PIIIProject.Models
 {
-    class StrengthPotion : Item
+    class StrengthPotion : Item, IMapObject
     {
         private const int STRENGTH_INCREASE = 5;
         private const string DISPLAY_NAME = "Strength Potion", DESCRIPTION = $"A strength potion that permanently increases your strength by 5.";
@@ -23,7 +23,14 @@ namespace PIIIProject.Models
 
         public override void Use(Player player)
         {
-            player.Strength += STRENGTH_INCREASE;
+            player.AddStrength(STRENGTH_INCREASE);
+        }
+
+        public static IMapObject LoadSaveDataFromString(string saveDataString)
+        {
+            if (string.IsNullOrEmpty(saveDataString))
+                return new StrengthPotion();
+            return null;
         }
     }
 }

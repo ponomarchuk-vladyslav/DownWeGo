@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
+using System.Collections.ObjectModel;
 
 namespace PIIIProject.Models
 {
@@ -14,9 +15,12 @@ namespace PIIIProject.Models
         {
             public struct Thing
             {
-                public IMapObject ThingData;
+                public Type ThingType;
                 public int ThingX, ThingY;
+                public string ThingData;
             }
+
+            public ObservableCollection<Item> Inventory;
             public List<Thing> Things = new List<Thing>();
             public int Rows, Columns;
         }
@@ -39,19 +43,21 @@ namespace PIIIProject.Models
                     {
                         saveData.Things.Add(new SaveData.Thing
                         {
-                            ThingData = thing,
+                            ThingType = thing.GetType(),
+                            ThingData = thing.ExportSaveDataAsString(),
                             ThingX = col,
                             ThingY = row
                         });
+
+                        if (thing is Player)
+                        {
+                            saveData.Inventory = (thing as Player).Inventory;
+                        }
                     }
                 }
             }
 
-            string saveDataJson = JsonConvert.SerializeObject(saveData,
-  new JsonSerializerSettings()
-  {
-      TypeNameHandling = TypeNameHandling.Auto
-  });
+            string saveDataJson = JsonConvert.SerializeObject(saveData, new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Auto });
 
             File.WriteAllText(path, saveDataJson);
         }
@@ -59,11 +65,7 @@ namespace PIIIProject.Models
         {
             string saveDataJson = File.ReadAllText(path);
 
-            SaveData saveData = JsonConvert.DeserializeObject<SaveData>(saveDataJson,
-                new JsonSerializerSettings()
-  {
-                TypeNameHandling = TypeNameHandling.Auto
-  });
+            SaveData saveData = JsonConvert.DeserializeObject<SaveData>(saveDataJson, new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Auto });
 
             if (saveData is null)
                 throw new Exception("Save is null.");
@@ -72,10 +74,30 @@ namespace PIIIProject.Models
 
             for (int i = saveData.Things.Count - 1; i >= 0; i--)
             {
-                map.AddThing(saveData.Things[i].ThingData, saveData.Things[i].ThingX, saveData.Things[i].ThingY);
-                if (map.LogicMap[saveData.Things[i].ThingY, saveData.Things[i].ThingX][map.LogicMap[saveData.Things[i].ThingY, saveData.Things[i].ThingX].Count - 1] is Player)
+                IMapObject thing;
+                if (saveData.Things[i].ThingType == typeof(Player))
+                    thing = Player.LoadSaveDataFromString(saveData.Things[i].ThingData);
+                else if (saveData.Things[i].ThingType == typeof(Enemy))
+                    thing = Enemy.LoadSaveDataFromString(saveData.Things[i].ThingData);
+                else if (saveData.Things[i].ThingType == typeof(Wall))
+                    thing = Wall.LoadSaveDataFromString(saveData.Things[i].ThingData);
+                else if (saveData.Things[i].ThingType == typeof(Escape))
+                    thing = Escape.LoadSaveDataFromString(saveData.Things[i].ThingData);
+                else if (saveData.Things[i].ThingType == typeof(HealthPotion))
+                    thing = HealthPotion.LoadSaveDataFromString(saveData.Things[i].ThingData);
+                else if (saveData.Things[i].ThingType == typeof(StrengthPotion))
+                    thing = StrengthPotion.LoadSaveDataFromString(saveData.Things[i].ThingData);
+                else if (saveData.Things[i].ThingType == typeof(DefensePotion))
+                    thing = DefensePotion.LoadSaveDataFromString(saveData.Things[i].ThingData);
+                else
+                    throw new Exception(saveData.Things[i].ThingType.ToString());
+
+                map.AddThing(thing, saveData.Things[i].ThingX, saveData.Things[i].ThingY);
+
+                if (thing is Player)
                 {
                     player = map.LogicMap[saveData.Things[i].ThingY, saveData.Things[i].ThingX][map.LogicMap[saveData.Things[i].ThingY, saveData.Things[i].ThingX].Count - 1] as Player;
+                    player.Inventory = saveData.Inventory;
                 }
             }
         }

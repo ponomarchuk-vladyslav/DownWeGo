@@ -19,5 +19,17 @@ namespace PIIIProject.Models
         { 
             return WALL_DISPLAY_CHAR; 
         }
+
+        public string ExportSaveDataAsString()
+        {
+            return "";
+        }
+
+        public static IMapObject LoadSaveDataFromString(string saveDataString)
+        {
+            if (string.IsNullOrEmpty(saveDataString))
+                return new Wall();
+            return null;
+        }
     }
 }

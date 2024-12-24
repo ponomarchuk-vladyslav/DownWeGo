@@ -34,7 +34,8 @@ namespace PIIIProject.Views
             InitializeComponent();
 
             _map = new GameMap(GAMEMAP_ROWS, GAMEMAP_COLUMNS);
-            _player = new Player(_map, 22, 12);
+            _player = new Player(22, 12);
+            _map.AddThing(_player, _player.CurrentX, _player.CurrentY);
 
             ConstructMap();
 
@@ -231,11 +232,11 @@ namespace PIIIProject.Views
             _map.AddThing(new HealthPotion(), 1, 2);
             _map.AddThing(new HealthPotion(), 19, 5);
 
-            new Enemy(_map, 3, 2, 3);
-            new Enemy(_map, 19, 6, 3);
-            new Enemy(_map, 24, 10, 5);
-            new Enemy(_map, 15, 8, 3);
-            new Enemy(_map, 8, 5, 10);
+            _map.AddThing(new Enemy(3, 2, 3), 3, 2);
+            _map.AddThing(new Enemy(19, 6, 3), 19, 6);
+            _map.AddThing(new Enemy(24, 10, 5), 24, 10);
+            _map.AddThing(new Enemy(15, 8, 3), 15, 8);
+            _map.AddThing(new Enemy(8, 5, 10), 8, 5);
 
 
             _map.AddThing(new StrengthPotion(), 22, 11);

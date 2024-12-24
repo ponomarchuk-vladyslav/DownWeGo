@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PIIIProject.Models
 {
-    class DefensePotion : Item
+    class DefensePotion : Item, IMapObject
     {
         private const int DEFENSE_INCREASE = 5;
         private const string DISPLAY_NAME = "Defense Potion", DESCRIPTION = $"A defense potion that permanently increases your defense by 5.";
@@ -23,7 +23,14 @@ namespace PIIIProject.Models
 
         public override void Use(Player player)
         {
-            player.Defense += DEFENSE_INCREASE;
+            player.AddDefense(DEFENSE_INCREASE);
+        }
+
+        public static IMapObject LoadSaveDataFromString(string saveDataString)
+        {
+            if (string.IsNullOrEmpty(saveDataString))
+                return new DefensePotion();
+            return null;
         }
     }
 }

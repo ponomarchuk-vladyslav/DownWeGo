@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PIIIProject.Models
 {
-    public abstract class Item : IMapObject
+    public abstract class Item
     {
         public const char ITEM_DISPLAY_CHAR = '$';
 
@@ -23,6 +23,11 @@ namespace PIIIProject.Models
         public char GetMapDisplayChar()
         { 
             return ITEM_DISPLAY_CHAR;
+        }
+
+        public string ExportSaveDataAsString()
+        {
+            return "";
         }
     }
 }
