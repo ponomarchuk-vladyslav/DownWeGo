@@ -19,6 +19,10 @@ namespace PIIIProject.Views
     /// </summary>
     public partial class GameOver : Window
     {
+        /// <summary>
+        /// Public constructor for the gameover screen. Displays either a victory or a defeat.
+        /// </summary>
+        /// <param name="win">Boolean representing if you win or not. If true, it will congratulate you on winning. If false, displays defeat.</param>
         public GameOver(bool win)
         {
             InitializeComponent();
@@ -30,6 +34,9 @@ namespace PIIIProject.Views
             }
         }
 
+        /// <summary>
+        /// Handler for the end game button click. Closes the screen.
+        /// </summary>
         private void BtnEnd_Clicked(object sender, RoutedEventArgs e)
         {
             this.Close();

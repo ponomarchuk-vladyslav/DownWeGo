@@ -24,7 +24,7 @@ namespace PIIIProject
         /// <returns>A string containing all the data of a string.</returns>
         string ExportSaveDataAsString();
 
-        /// /// <summary>
+        /// <summary>
         /// Creates a new object from the provided save data and returns the object.
         /// </summary>
         /// <param name="saveDataString">The save data as a string, created by the export method.</param>

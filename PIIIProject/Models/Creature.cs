@@ -12,7 +12,7 @@ namespace PIIIProject.Models
         private string _name;
         private int _level, _strength, _defense;
         private double _health, _blockMultiplier;
-        protected int _currentX, _currentY;
+        private int _currentX, _currentY;
 
         /// <summary>
         /// The X Coordinate of the creature on the map. Used to track where it is so it can be removed.
@@ -51,6 +51,8 @@ namespace PIIIProject.Models
             {
                 if (string.IsNullOrEmpty(value))
                     throw new ArgumentNullException("The creature must have a name.");
+                if (value.Contains(IMapObject.EXPORT_DIVIDER_CHAR))
+                    throw new Exception($"The creature name cannot contain the divider character ({IMapObject.EXPORT_DIVIDER_CHAR}), it will break the saving/loading.");
                 _name = value;
             }
         }
@@ -60,7 +62,7 @@ namespace PIIIProject.Models
         public int Level
         {
             get { return _level; }
-            protected set
+            private set
             {
                 _level = value;
                 if (value < 1)

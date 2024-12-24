@@ -19,10 +19,17 @@ namespace PIIIProject
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Default constructor. Everything starts here.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
         }
+        
+        /// <summary>
+        /// Handles the start button click. Starts a new game "from scratch" and closes this window.
+        /// </summary>
         private void Btn_StartClicked(object sender, RoutedEventArgs e)
         {
             Game game = new Game();
@@ -33,27 +40,49 @@ namespace PIIIProject
 
         }
 
+        /// <summary>
+        /// Loads a game from a file, if possible.
+        /// </summary>
         private void Btn_LoadClicked(object sender, RoutedEventArgs e)
         {
-
-            //OpenFileDialog openFileDialog = new OpenFileDialog();
-
             Player tempP = null;
             GameMap tempGM = null;
+            string saveLocation = null;
 
-            SaverLoader.Load(ref tempP, ref tempGM);
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Save Files |*.save";
 
-            Game game = new Game(tempP, tempGM);
-            game.Show();
-            this.Close();
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                saveLocation = openFileDialog.FileName;
+            }
+
+            if (saveLocation is not null)
+            {
+                try
+                {
+                    SaverLoader.Load(ref tempP, ref tempGM, saveLocation);
+
+                    Game game = new Game(tempP, tempGM);
+                    game.Show();
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Warning! Error has occured while trying to load file:\n{ex.Message}", "Error");
+                }
+            }
         }
 
+        /// <summary>
+        /// Handles the info button click. Opens an info window and closes this one.
+        /// </summary>
         private void Btn_InfoClicked(object sender, RoutedEventArgs e)
         {
             Info info = new Info();
             info.Show();
             this.Close();
-
         }
     }
 }

@@ -15,13 +15,38 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Label Content="INFO" FontSize="35" Foreground="White" HorizontalAlignment="Center" Grid.Row="0" FontWeight="ExtraBlack" VerticalAlignment="Top"/>
 
-        <Border Grid.Row="1" Grid.RowSpan="5" BorderThickness="5" BorderBrush="SaddleBrown" Margin="25" Background="DarkSlateGray">
-            <TextBlock Text="You are a knight in a dungeon. W, A, S, D keys move you when you play. Use mouse left-click to navigate the various menus you will see. You will find items around the dungeon. Click 'inventory', the item, and then 'Use' to consume them. You must search for the door to leave the dungeon if you want to win! Enemies will be in the way and you must fight them when you reach them! Good luck!" Foreground="White" HorizontalAlignment="Center" Margin="15" TextWrapping="Wrap" LineHeight="65" FontSize="25"/>
+        <Border Grid.Row="1" Grid.RowSpan="9" BorderThickness="5" BorderBrush="SaddleBrown" Margin="25" Background="DarkSlateGray">
+            <TextBlock Text="Map: To move use WASD to move up, right, down or left, respectively. To pick up items (chests), walk over them. To fight monsters (skeletons and eyeballs), walk into them. To escape/win, walk into the escape (door) after killing all the enemies. Press save to save your game. Press inventory to open your inventory." Foreground="White" HorizontalAlignment="Center" Margin="15" TextWrapping="Wrap" LineHeight="20" FontSize="15"/>
         </Border>
-        
-        <Button Content="Back To Main Menu" FontSize="25" Grid.Row="6" Margin="25, 5, 25, 5" Click="BtnMainMenu_Clicked"/>
+        <Border Grid.Row="8" Grid.RowSpan="9" BorderThickness="5" BorderBrush="SaddleBrown" Margin="25" Background="DarkSlateGray">
+            <TextBlock Text="Combat: Press attack to hit the monster, dealing damage equal to your strength minus the monster's defense. Press block to increase your defense for 1 turn. Press inventory to open your inventory. Press run away to return to the map. If your health reaches 0, you lose tha game. If the monster's health reaches 0, you return to the map and the monster is removed from the map." Foreground="White" HorizontalAlignment="Center" Margin="15" TextWrapping="Wrap" LineHeight="20" FontSize="15"/>
+        </Border>
+        <Border Grid.Row="15" Grid.RowSpan="8" BorderThickness="5" BorderBrush="SaddleBrown" Margin="25" Background="DarkSlateGray">
+            <TextBlock Text="Inventory: You have a list of items you pick up on the map. Click on an item to select it and and view it's description. To use an item (potions for now, apply it's effects to you), select the item and press the use button." Foreground="White" HorizontalAlignment="Center" Margin="15" TextWrapping="Wrap" LineHeight="20" FontSize="15"/>
+        </Border>
+
+        <Button Content="Back To Main Menu" FontSize="20" Grid.Row="23" Grid.RowSpan="2" Margin="25, 5, 25, 5" Click="BtnMainMenu_Clicked" Width="250"/>
     </Grid>
 </Window>

@@ -19,11 +19,17 @@ namespace PIIIProject.Views
     /// </summary>
     public partial class Info : Window
     {
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public Info()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the back to main menu button click. Opens the main menu and closes this window.
+        /// </summary>
         private void BtnMainMenu_Clicked(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();

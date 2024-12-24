@@ -13,8 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using PIIIProject.Models;
-
-using System.IO;
+using Microsoft.Win32;
 
 namespace PIIIProject.Views
 {
@@ -23,26 +22,43 @@ namespace PIIIProject.Views
     /// </summary>
     public partial class Game : Window
     {
+        // Constants for the game map size
         const int GAMEMAP_COLUMNS = 27;
         const int GAMEMAP_ROWS = 16;
 
+        // private fields
         private GameMap _map;
         private Player _player;
 
+        /// <summary>
+        /// Default constructor. Called on a new game. Constructs a new map.
+        /// </summary>
         public Game()
         {
             InitializeComponent();
 
-            _map = new GameMap(GAMEMAP_ROWS, GAMEMAP_COLUMNS);
-            _player = new Player(24, 2);
-            _map.AddThing(_player, _player.CurrentX, _player.CurrentY);
+            try
+            {
+                _map = new GameMap(GAMEMAP_ROWS, GAMEMAP_COLUMNS);
+                _player = Player.NewPlayer(_map, 24, 2);
 
-            ConstructMap();
+                ConstructMap();
 
-            InitializeBackground();
-            UpdateDisplay(_map, _player);
+                InitializeBackground();
+                UpdateDisplay(_map, _player);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Warning! Error has occured while creating map:\n{ex.Message}", "Error");
+                this.Close();
+            }
         }
 
+        /// <summary>
+        /// Constructor called with the ready map and player pointer provided to it.
+        /// </summary>
+        /// <param name="player">Player pointer provided.</param>
+        /// <param name="map">Map provided.</param>
         public Game(Player player, GameMap map)
         {
             InitializeComponent();
@@ -54,6 +70,10 @@ namespace PIIIProject.Views
             UpdateDisplay(_map, _player);
         }
 
+        /// <summary>
+        /// Processes the keypresses of the user and move the player character accordingly. Also deals with any collisions.
+        /// </summary>
+        /// <param name="e">The key pressed by the player.</param>
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             ICollidable contact;
@@ -76,6 +96,7 @@ namespace PIIIProject.Views
                     break;
             }
 
+            // If the player walks into an enemy, open combat screen and close this one.
             if (contact is Enemy)
             {
                 Combat combatScreen = new Combat(_map, _player, contact as Enemy);
@@ -84,6 +105,7 @@ namespace PIIIProject.Views
                 this.Close();
             }
 
+            // If the player walks into an exit and all the enemies are dead, open gameover screen and close this one.
             if (contact is Escape && Enemy.EnemyCount <= 0)
             {
                 GameOver gameOverScreen = new GameOver(true);
@@ -94,7 +116,13 @@ namespace PIIIProject.Views
             UpdateDisplay(_map, _player);
         }
 
-        public string MapCharToImage(char c)
+        /// <summary>
+        /// Converts a character to a corresponding image path using a switch statement.
+        /// I made this because I originaly used characters for display, this helps to map pictures on top of them.
+        /// </summary>
+        /// <param name="c">The character to convert.</param>
+        /// <returns>A path to the corresponding picture.</returns>
+        public static string MapCharToImage(char c)
         {
             string img;
 
@@ -112,6 +140,7 @@ namespace PIIIProject.Views
                 case Enemy.ENEMY_DISPLAY_CHAR:
                     img = @"\Sprites\skeleton.png";
                     break;
+                // This returns an empty path because I added a background of floor tiles/
                 case GameMap.FLOOR_DISPLAY_CHAR:
                     img = "";
                     break;
@@ -129,45 +158,67 @@ namespace PIIIProject.Views
             return img;
         }
 
-        public void UpdateDisplay(GameMap map, Player player)
+        /// <summary>
+        /// Updates the display. Centers the display on the position of the player.
+        /// </summary>
+        /// <param name="map">The map to display.</param>
+        /// <param name="player">The player to center on.</param>
+        private void UpdateDisplay(GameMap map, Player player)
         {
-            int heightDifference = (Map.Rows / 2) + player.CurrentY;
-            int widthDifference = (Map.Columns / 2) - player.CurrentX;
+            if (player is null)
+                throw new ArgumentNullException("The player is null");
+            if (map is null)
+                throw new ArgumentNullException("The map is null.");
+
+            // Calculates the offset (distance from player to the display edge if the player is in the middle of the display
+            int heightDifference = (MapDisplay.Rows / 2) + player.CurrentY;
+            int widthDifference = (MapDisplay.Columns / 2) - player.CurrentX;
+
             char[,] mapDisplay = map.DisplayMap;
             string path;
 
-            Map.Children.Clear();
+            // Clears the map
+            MapDisplay.Children.Clear();
 
-            for (int row = 0; row < Map.Rows; row++)
+            // Go through all the cells of the map display
+            for (int row = 0; row < MapDisplay.Rows; row++)
             {
-                for (int column = 0; column < Map.Columns; column++)
+                for (int column = 0; column < MapDisplay.Columns; column++)
                 {
+                    // Create new image
                     Image img = new Image();
 
+                    // If the tile to be displayed is not in the map (the player is near the edge of the map, and the display is supposed to show stuff beyond the map).
                     if (heightDifference - row < 0 || column < widthDifference || heightDifference - row >= mapDisplay.GetLength(0) || column - widthDifference >= mapDisplay.GetLength(1))
                     {
-                        path = MapCharToImage('0');
+                        // Displays an empty image
+                        path = MapCharToImage(' ');
                     }
                     else
                     {
+                        // Displays the corresponding image
                         path = MapCharToImage(mapDisplay[heightDifference - row, column - widthDifference]);
                     }
                     img.Source = new BitmapImage(new Uri(path, UriKind.Relative));
                     img.Stretch = Stretch.Fill;
-                    img.Margin = new Thickness(0.05);
 
-                    Map.Children.Add(img);
+                    // Adds the image to the display grid
+                    MapDisplay.Children.Add(img);
                 }
             }
 
+            // Updates the health and enemy count display
             HealthDisplay.Text = $"Health: {player.Health}";
             EnemyCountDisplay.Text = $"Enemies left: {Enemy.EnemyCount}";
         }
 
-        public void InitializeBackground()
+        /// <summary>
+        /// Makes sure that the background is the same size as the display itself and fills it with floor pictures.
+        /// </summary>
+        private void InitializeBackground()
         {
-            Background.Rows = Map.Rows;
-            Background.Columns = Map.Columns;
+            Background.Rows = MapDisplay.Rows;
+            Background.Columns = MapDisplay.Columns;
 
             for (int row = 0; row < Background.Rows; row++)
             {
@@ -183,21 +234,28 @@ namespace PIIIProject.Views
             }
         }
 
+        /// <summary>
+        /// Handles the inventory button click. Opens a new inventory window and closes this one.
+        /// </summary>
         private void BtnInventory_Click(object sender, RoutedEventArgs e)
         {
-            Inventory inventory = new Inventory(_player);
-
+            Inventory inventory = new Inventory(_map, _player);
             inventory.Show();
+            this.Close();
         }
 
+        /// <summary>
+        /// Creates an example map.
+        /// </summary>
         private void ConstructMap()
         {
-
+            // Adds the border walls
             _map.AddWall(0, 0, 0, 15);
             _map.AddWall(0, 15, 26, 15);
             _map.AddWall(26, 15, 26, 0);
             _map.AddWall(26, 0, 0, 0);
 
+            // Adds different walls
             _map.AddWall(7, 9, 7, 13);
             _map.AddWall(7, 9, 2, 9);
             _map.AddWall(7, 9, 2, 9);
@@ -221,12 +279,7 @@ namespace PIIIProject.Views
             _map.AddWall(16, 7, 18, 7);
             _map.AddWall(21, 7, 20, 7);
 
-
-
-
-
-
-
+            // Adds health potions
             _map.AddThing(new HealthPotion(), 24, 12);
             _map.AddThing(new HealthPotion(), 10, 6);
             _map.AddThing(new HealthPotion(), 1, 2);
@@ -234,13 +287,14 @@ namespace PIIIProject.Views
             _map.AddThing(new HealthPotion(), 25, 1);
             _map.AddThing(new HealthPotion(), 3, 7);
 
-            _map.AddThing(new Enemy(3, 2, 3), 3, 2);
-            _map.AddThing(new Enemy(19, 6, 3), 19, 6);
-            _map.AddThing(new Enemy(24, 10, 5), 24, 10);
-            _map.AddThing(new Enemy(15, 8, 3), 15, 8);
-            _map.AddThing(new Enemy(8, 5, 10), 8, 5);
+            // Adds enemies
+            Enemy.NewEnemy(_map, 3, 2, 3);
+            Enemy.NewEnemy(_map, 19, 6, 3);
+            Enemy.NewEnemy(_map, 24, 10, 5);
+            Enemy.NewEnemy(_map, 15, 8, 3);
+            Enemy.NewEnemy(_map, 8, 5, 10);
 
-
+            // Adds some strength and defense potions
             _map.AddThing(new StrengthPotion(), 14, 12);
             _map.AddThing(new DefensePotion(), 14, 12);
             _map.AddThing(new StrengthPotion(), 5, 12);
@@ -248,13 +302,36 @@ namespace PIIIProject.Views
             _map.AddThing(new StrengthPotion(), 15, 2);
             _map.AddThing(new DefensePotion(), 25, 1);
 
-
+            // Adds an escape
             _map.AddThing(new Escape(), 25, 14);
         }
 
+        /// <summary>
+        /// Method that handles the "Save" button. Saves the game when pressed.
+        /// </summary>
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            SaverLoader.Save(_player,  _map);
+            string saveLocation = null;
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Save Files |*.save";
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                saveLocation = saveFileDialog.FileName;
+            }
+
+            if (!string.IsNullOrEmpty(saveLocation))
+            {
+                try
+                {
+                    SaverLoader.Save(_player, _map, saveLocation);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Warning! Error has occured while trying to save file:\n{ex.Message}", "Error");
+                }
+            }
         }
     }
 }
