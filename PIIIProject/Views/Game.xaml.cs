@@ -220,7 +220,7 @@ namespace PIIIProject.Views
             _map.AddWall(16, 7, 16, 4);
             _map.AddWall(16, 7, 18, 7);
             _map.AddWall(21, 7, 20, 7);
-            
+
 
 
 
@@ -231,26 +231,25 @@ namespace PIIIProject.Views
             _map.AddThing(new HealthPotion(), 10, 6);
             _map.AddThing(new HealthPotion(), 1, 2);
             _map.AddThing(new HealthPotion(), 19, 5);
+            _map.AddThing(new HealthPotion(), 25, 1);
+            _map.AddThing(new HealthPotion(), 3, 7);
 
-            _map.AddThing(new Enemy(3, 2, 3), 3, 2);
-            _map.AddThing(new Enemy(19, 6, 3), 19, 6);
-            _map.AddThing(new Enemy(24, 10, 5), 24, 10);
-            _map.AddThing(new Enemy(15, 8, 3), 15, 8);
-            _map.AddThing(new Enemy(8, 5, 10), 8, 5);
+            new Enemy(_map, 3, 2, 3);
+            new Enemy(_map, 19, 6, 3);
+            new Enemy(_map, 24, 10, 5);
+            new Enemy(_map, 15, 8, 3);
+            new Enemy(_map, 8, 5, 10);
 
 
-            _map.AddThing(new StrengthPotion(), 22, 11);
-            _map.AddThing(new DefensePotion(), 22, 11);
-            _map.AddThing(new StrengthPotion(), 22, 11);
-            _map.AddThing(new DefensePotion(), 22, 11);
-            _map.AddThing(new StrengthPotion(), 22, 11);
-            _map.AddThing(new DefensePotion(), 22, 11);
-            _map.AddThing(new StrengthPotion(), 22, 11);
-            _map.AddThing(new DefensePotion(), 22, 11);
-            _map.AddThing(new StrengthPotion(), 22, 11);
-            _map.AddThing(new DefensePotion(), 22, 11);
+            _map.AddThing(new StrengthPotion(), 14, 12);
+            _map.AddThing(new DefensePotion(), 14, 12);
+            _map.AddThing(new StrengthPotion(), 5, 12);
+            _map.AddThing(new DefensePotion(), 24, 8);
+            _map.AddThing(new StrengthPotion(), 15, 2);
+            _map.AddThing(new DefensePotion(), 25, 1);
 
-            _map.AddThing(new Escape(), 21, 12);
+
+            _map.AddThing(new Escape(), 25, 14);
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
