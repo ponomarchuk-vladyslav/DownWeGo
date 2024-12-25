@@ -10,6 +10,7 @@ namespace PIIIProject.Models
     {
         // The total number of enemies spawned
         private static int _enemyCount = 0;
+        private bool _isBoss;
 
         /// <summary>
         /// The read-only property to get the total enemy count. Currently used to check if all enemies are killed before allowing the player to escape.
@@ -29,8 +30,6 @@ namespace PIIIProject.Models
         public const char BOSS_DISPLAY_CHAR = 'X';
         public const int BOSS_LEVEL_THRESHOLD = 10;
         public const int START_HEALTH = 10, START_STRENGTH = 2, START_DEFENSE = 1;
-
-        private bool _isBoss;
 
         /// <summary>
         /// Gets the character representing the enemy.
